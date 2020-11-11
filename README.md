@@ -90,13 +90,13 @@ For automated tests of the complete example using [bats](https://github.com/bats
     )
   }
 
-  data "aws_organizations_organization" "this" {}
+  data "aws_caller_identity" "this" {}
 
   module "service_control_policies" {
     source = "../../"
 
     service_control_policy_statements = local.service_control_policy_statements
-    target_id                         = data.aws_organizations_organization.this.roots[0].id
+    target_id                         = data.aws_caller_identity.this.account_id
 
     context = module.this.context
   }
@@ -192,6 +192,8 @@ Check out these related projects.
 
 For additional context, refer to some of these links.
 
+- [Service control policies](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html) - Service control policies (SCPs) are a type of organization policy that you can use to manage permissions in your organization.
+- [SCP syntax](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html) - Service control policies (SCPs) use a similar syntax to that used by AWS Identity and Access Management (IAM) permission policies and resource-based policies.
 - [Terraform Standard Module Structure](https://www.terraform.io/docs/modules/index.html#standard-module-structure) - HashiCorp's standard module structure is a file and directory layout we recommend for reusable modules distributed in separate repositories.
 - [Terraform Module Requirements](https://www.terraform.io/docs/registry/modules/publish.html#requirements) - HashiCorp's guidance on all the requirements for publishing a module. Meeting the requirements for publishing a module is extremely easy.
 - [Terraform `random_integer` Resource](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/integer) - The resource random_integer generates random values from a given range, described by the min and max attributes of a given resource.
