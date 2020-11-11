@@ -13,8 +13,9 @@ data "aws_organizations_organization" "this" {}
 module "service_control_policies" {
   source = "../../"
 
-  service_control_policy_statements = local.service_control_policy_statements
-  target_id                         = data.aws_organizations_organization.this.roots[0].id
+  service_control_policy_statements  = local.service_control_policy_statements
+  service_control_policy_description = var.service_control_policy_description
+  target_id                          = data.aws_organizations_organization.this.roots[0].id
 
   context = module.this.context
 }
