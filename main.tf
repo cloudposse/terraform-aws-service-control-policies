@@ -1,5 +1,6 @@
 locals {
   service_control_policy_content = {
+    Version   = "2012-10-17"
     Statement = var.service_control_policy_statements
   }
 }

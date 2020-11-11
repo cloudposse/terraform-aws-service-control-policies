@@ -37,12 +37,12 @@ func TestExamplesComplete(t *testing.T) {
 	terraform.InitAndApply(t, terraformOptions)
 
 	// Run `terraform output` to get the value of an output variable
-	organizationsPolicyId := terraform.OutputList(t, terraformOptions, "organizations_policy_id")
+	organizationsPolicyId := terraform.Output(t, terraformOptions, "organizations_policy_id")
 	// Verify we're getting back the outputs we expect
 	assert.NotEmpty(t, organizationsPolicyId)
 
 	// Run `terraform output` to get the value of an output variable
-	organizationsPolicyArn := terraform.OutputList(t, terraformOptions, "organizations_policy_arn")
+	organizationsPolicyArn := terraform.Output(t, terraformOptions, "organizations_policy_arn")
 	// Verify we're getting back the outputs we expect
-	assert.NotEmpty(t, organizationsPolicyArn)
+	assert.Contains(t, organizationsPolicyArn, "/service_control_policy/"+organizationsPolicyId)
 }

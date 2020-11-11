@@ -1,17 +1,6 @@
 variable "service_control_policy_statements" {
-  type = list(object({
-    sid         = string
-    effect      = string
-    actions     = list(string)
-    not_actions = list(string)
-    resources   = list(string)
-    condition = list(object({
-      test     = string
-      variable = string
-      values   = list(string)
-    }))
-  }))
-  description = "Service Control Policy statements"
+  type        = any
+  description = "List of Service Control Policy statements"
 }
 
 variable "service_control_policy_description" {

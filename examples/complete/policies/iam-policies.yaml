@@ -1,9 +1,7 @@
-- sid: "DenyCreatingIAMUsers"
-  effect: "Deny"
-  actions:
+- Sid: "DenyCreatingIAMUsers"
+  Effect: "Deny"
+  Action:
     - "iam:CreateUser"
     - "iam:CreateAccessKey"
-  not_actions: null
-  resources:
+  Resource:
     - "*"
-  condition: null

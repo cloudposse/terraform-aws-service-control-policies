@@ -154,7 +154,7 @@ Available targets:
 | namespace | Namespace, which could be your organization name or abbreviation, e.g. 'eg' or 'cp' | `string` | `null` | no |
 | regex\_replace\_chars | Regex to replace chars with empty string in `namespace`, `environment`, `stage` and `name`.<br>If not set, `"/[^a-zA-Z0-9-]/"` is used to remove all characters other than hyphens, letters and digits. | `string` | `null` | no |
 | service\_control\_policy\_description | Description of the combined Service Control Policy | `string` | `null` | no |
-| service\_control\_policy\_statements | Service Control Policy statements | <pre>list(object({<br>    sid         = string<br>    effect      = string<br>    actions     = list(string)<br>    not_actions = list(string)<br>    resources   = list(string)<br>    condition = list(object({<br>      test     = string<br>      variable = string<br>      values   = list(string)<br>    }))<br>  }))</pre> | n/a | yes |
+| service\_control\_policy\_statements | List of Service Control Policy statements | `any` | n/a | yes |
 | stage | Stage, e.g. 'prod', 'staging', 'dev', OR 'source', 'build', 'test', 'deploy', 'release' | `string` | `null` | no |
 | tags | Additional tags (e.g. `map('BusinessUnit','XYZ')` | `map(string)` | `{}` | no |
 | target\_id | The unique identifier (ID) of the organization root, organizational unit, or account number that you want to attach the policy to | `string` | n/a | yes |
