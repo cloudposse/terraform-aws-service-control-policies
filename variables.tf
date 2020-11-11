@@ -1,19 +1,10 @@
 variable "service_control_policy_statements" {
   type = list(object({
-    sid           = string
-    effect        = string
-    actions       = list(string)
-    not_actions   = list(string)
-    resources     = list(string)
-    not_resources = list(string)
-    principals = object({
-      type        = string
-      identifiers = list(string)
-    })
-    not_principals = object({
-      type        = string
-      identifiers = list(string)
-    })
+    sid         = string
+    effect      = string
+    actions     = list(string)
+    not_actions = list(string)
+    resources   = list(string)
     condition = list(object({
       test     = string
       variable = string

@@ -5,9 +5,6 @@
   not_actions: null
   resources:
     - "*"
-  not_resources: null
-  principals: null
-  not_principals: null
   condition: null
 
 
@@ -18,9 +15,6 @@
   not_actions: null
   resources:
     - "*"
-  not_resources: null
-  principals: null
-  not_principals: null
   condition:
     - test: "StringLike"
       variable: "aws:PrincipalArn"
