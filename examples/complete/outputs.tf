@@ -1,14 +1,9 @@
-output "id" {
-  description = "ID of the created example"
-  value       = module.example.id
+output "organizations_policy_id" {
+  value       = module.service_control_policies.organizations_policy_id
+  description = "The unique identifier of the policy"
 }
 
-output "example" {
-  description = "Output \"example\" from example module"
-  value       = module.example.example
-}
-
-output "random" {
-  description = "Output \"random\" from example module"
-  value       = module.example.random
+output "organizations_policy_arn" {
+  value       = module.service_control_policies.organizations_policy_arn
+  description = "Amazon Resource Name (ARN) of the policy"
 }
