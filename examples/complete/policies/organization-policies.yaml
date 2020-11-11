@@ -1,3 +1,13 @@
+- sid: "DenyLeavingOrganization"
+  effect: "Deny"
+  actions:
+    - "organizations:LeaveOrganization"
+  not_actions: null
+  resources:
+    - "*"
+  condition: null
+
+
 - sid: "DenyRootAccount"
   effect: "Deny"
   actions:
