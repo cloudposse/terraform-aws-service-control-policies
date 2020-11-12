@@ -1,18 +1,19 @@
-- Sid: "DenyLeavingOrganization"
-  Effect: "Deny"
-  Action:
+- sid: "DenyLeavingOrganization"
+  effect: "Deny"
+  actions:
     - "organizations:LeaveOrganization"
-  Resource:
+  resources:
     - "*"
 
 
-- Sid: "DenyRootAccountAccess"
-  Effect: "Deny"
-  Action:
+- sid: "DenyRootAccount"
+  effect: "Deny"
+  actions:
     - "*"
-  Resource:
+  resources:
     - "*"
-  Condition:
-    StringLike:
-      "aws:PrincipalArn":
-        - "arn:aws:iam::*:root"
+  condition:
+    test: "StringLike"
+    variable: "aws:PrincipalArn"
+    values:
+      - "arn:aws:iam::*:root"

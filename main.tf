@@ -1,7 +1,36 @@
 locals {
-  service_control_policy_content = {
-    Version   = "2012-10-17"
-    Statement = var.service_control_policy_statements
+  service_control_policy_statements_map = { for i in var.service_control_policy_statements : i.sid => i }
+
+  statements = flatten([for i in data.aws_iam_policy_document.this : jsondecode(i.json).Statement])
+  version    = try(jsondecode(values(data.aws_iam_policy_document.this)[0].json).Version, null)
+
+  service_control_policy_json = jsonencode(
+    {
+      Version   = local.version
+      Statement = local.statements
+    }
+  )
+}
+
+data "aws_iam_policy_document" "this" {
+  for_each = local.service_control_policy_statements_map
+
+  statement {
+    sid         = each.value.sid
+    effect      = each.value.effect
+    actions     = try(each.value.actions, null)
+    not_actions = try(each.value.not_actions, null)
+    resources   = each.value.resources
+
+    dynamic "condition" {
+      for_each = try(each.value.condition, null) != null ? [true] : []
+
+      content {
+        test     = each.value.condition.test
+        variable = each.value.condition.variable
+        values   = each.value.condition.values
+      }
+    }
   }
 }
 
@@ -9,7 +38,7 @@ resource "aws_organizations_policy" "this" {
   count       = module.this.enabled ? 1 : 0
   name        = module.this.id
   description = var.service_control_policy_description
-  content     = jsonencode(local.service_control_policy_content)
+  content     = local.service_control_policy_json
   tags        = module.this.tags
 }
 

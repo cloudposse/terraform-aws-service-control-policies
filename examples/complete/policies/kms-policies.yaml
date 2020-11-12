@@ -1,7 +1,7 @@
-- Sid: "DenyDeletingKMSKeys"
-  Effect: "Deny"
-  Action:
+- sid: "DenyDeletingKMSKeys"
+  effect: "Deny"
+  actions:
     - "kms:ScheduleKeyDeletion"
     - "kms:Delete*"
-  Resource:
+  resources:
     - "*"
