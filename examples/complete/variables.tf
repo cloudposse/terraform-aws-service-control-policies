@@ -1,4 +1,10 @@
-variable "example" {
+variable "region" {
   type        = string
-  description = "The value which will be passed to the example module"
+  description = "AWS region"
+}
+
+variable "service_control_policy_description" {
+  type        = string
+  default     = null
+  description = "Description of the combined Service Control Policy"
 }

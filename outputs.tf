@@ -1,14 +1,9 @@
-output "id" {
-  description = "ID of the created example"
-  value       = module.this.enabled ? module.this.id : null
+output "organizations_policy_id" {
+  value       = join("", aws_organizations_policy.this.*.id)
+  description = "The unique identifier of the policy"
 }
 
-output "example" {
-  description = "Example output"
-  value       = module.this.enabled ? local.example : null
-}
-
-output "random" {
-  description = "Stable random number for this example"
-  value       = module.this.enabled ? join("", random_integer.example[*].result) : null
+output "organizations_policy_arn" {
+  value       = join("", aws_organizations_policy.this.*.arn)
+  description = "Amazon Resource Name (ARN) of the policy"
 }

@@ -1,10 +1,11 @@
+enabled = true
+
 region = "us-east-2"
 
 namespace = "eg"
 
-environment = "ue2"
-
 stage = "test"
 
-name = "example"
+name = "scp"
 
+service_control_policy_description = "Test Service Control Policy"
