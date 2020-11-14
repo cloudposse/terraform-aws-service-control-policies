@@ -23,12 +23,12 @@ data "aws_iam_policy_document" "this" {
     resources   = each.value.resources
 
     dynamic "condition" {
-      for_each = try(each.value.condition, null) != null ? [true] : []
+      for_each = try(each.value.condition, null) != null ? each.value.condition : []
 
       content {
-        test     = each.value.condition.test
-        variable = each.value.condition.variable
-        values   = each.value.condition.values
+        test     = condition.value.test
+        variable = condition.value.variable
+        values   = condition.value.values
       }
     }
   }
