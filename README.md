@@ -129,14 +129,14 @@ Available targets:
 | Name | Version |
 |------|---------|
 | terraform | >= 0.12.0 |
-| aws | >= 2.0 |
+| aws | >= 3.0 |
 | local | >= 1.3 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 2.0 |
+| aws | >= 3.0 |
 
 ## Inputs
 
@@ -193,6 +193,7 @@ Check out these related projects.
 For additional context, refer to some of these links.
 
 - [Service control policies](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html) - Service control policies (SCPs) are a type of organization policy that you can use to manage permissions in your organization.
+- [Example service control policies](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_examples.html) - Examples of Service Control Policies (SCPs).
 - [SCP syntax](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html) - Service control policies (SCPs) use a similar syntax to that used by AWS Identity and Access Management (IAM) permission policies and resource-based policies.
 - [Terraform Standard Module Structure](https://www.terraform.io/docs/modules/index.html#standard-module-structure) - HashiCorp's standard module structure is a file and directory layout we recommend for reusable modules distributed in separate repositories.
 - [Terraform Module Requirements](https://www.terraform.io/docs/registry/modules/publish.html#requirements) - HashiCorp's guidance on all the requirements for publishing a module. Meeting the requirements for publishing a module is extremely easy.
