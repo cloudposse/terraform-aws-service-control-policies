@@ -80,14 +80,13 @@ For automated tests of the complete example using [bats](https://github.com/bats
 
 
 ```hcl
-  locals {
-    service_control_policy_statements = flatten(
-      [
-        for file in fileset(path.module, "policies/*.yaml") : [
-          for k, v in yamldecode(file(format("%s/%s", path.module, file))) : v
-        ]
-      ]
-    )
+  module "yaml_config" {
+    source = "git::https://github.com/cloudposse/terraform-yaml-config.git?ref=master"
+
+    list_config_local_base_path = path.module
+    list_config_paths           = ["policies/*.yaml"]
+
+    context = module.this.context
   }
 
   data "aws_caller_identity" "this" {}
@@ -95,8 +94,9 @@ For automated tests of the complete example using [bats](https://github.com/bats
   module "service_control_policies" {
     source = "../../"
 
-    service_control_policy_statements = local.service_control_policy_statements
-    target_id                         = data.aws_caller_identity.this.account_id
+    service_control_policy_statements  = module.yaml_config.list_configs
+    service_control_policy_description = var.service_control_policy_description
+    target_id                          = data.aws_caller_identity.this.account_id
 
     context = module.this.context
   }
