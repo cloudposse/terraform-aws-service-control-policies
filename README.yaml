@@ -56,6 +56,9 @@ related:
   - name: "terraform-aws-iam-chamber-s3-role"
     description: "Terraform module to provision an IAM role with configurable permissions to access S3 as chamber backend."
     url: "https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role"
+  - name: "terraform-yaml-config"
+    description: "Terraform module to convert local and remote YAML configuration templates into Terraform lists and maps."
+    url: "https://github.com/cloudposse/terraform-yaml-config"
 
 # List any resources helpful for someone to get started. For example, link to the hashicorp documentation or AWS documentation.
 references:
@@ -100,14 +103,13 @@ usage: |-
 
 
   ```hcl
-    locals {
-      service_control_policy_statements = flatten(
-        [
-          for file in fileset(path.module, "policies/*.yaml") : [
-            for k, v in yamldecode(file(format("%s/%s", path.module, file))) : v
-          ]
-        ]
-      )
+    module "yaml_config" {
+      source = "git::https://github.com/cloudposse/terraform-yaml-config.git?ref=master"
+
+      list_config_local_base_path = path.module
+      list_config_paths           = ["policies/*.yaml"]
+
+      context = module.this.context
     }
 
     data "aws_caller_identity" "this" {}
@@ -115,8 +117,9 @@ usage: |-
     module "service_control_policies" {
       source = "../../"
 
-      service_control_policy_statements = local.service_control_policy_statements
-      target_id                         = data.aws_caller_identity.this.account_id
+      service_control_policy_statements  = module.yaml_config.list_configs
+      service_control_policy_description = var.service_control_policy_description
+      target_id                          = data.aws_caller_identity.this.account_id
 
       context = module.this.context
     }

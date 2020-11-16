@@ -80,14 +80,13 @@ For automated tests of the complete example using [bats](https://github.com/bats
 
 
 ```hcl
-  locals {
-    service_control_policy_statements = flatten(
-      [
-        for file in fileset(path.module, "policies/*.yaml") : [
-          for k, v in yamldecode(file(format("%s/%s", path.module, file))) : v
-        ]
-      ]
-    )
+  module "yaml_config" {
+    source = "git::https://github.com/cloudposse/terraform-yaml-config.git?ref=master"
+
+    list_config_local_base_path = path.module
+    list_config_paths           = ["policies/*.yaml"]
+
+    context = module.this.context
   }
 
   data "aws_caller_identity" "this" {}
@@ -95,8 +94,9 @@ For automated tests of the complete example using [bats](https://github.com/bats
   module "service_control_policies" {
     source = "../../"
 
-    service_control_policy_statements = local.service_control_policy_statements
-    target_id                         = data.aws_caller_identity.this.account_id
+    service_control_policy_statements  = module.yaml_config.list_configs
+    service_control_policy_description = var.service_control_policy_description
+    target_id                          = data.aws_caller_identity.this.account_id
 
     context = module.this.context
   }
@@ -184,6 +184,7 @@ Check out these related projects.
 - [terraform-aws-iam-role](https://github.com/cloudposse/terraform-aws-iam-role) - A Terraform module that creates IAM role with provided JSON IAM polices documents.
 - [terraform-aws-iam-policy-document-aggregator](https://github.com/cloudposse/terraform-aws-iam-policy-document-aggregator) - Terraform module to aggregate multiple IAM policy documents into single policy document
 - [terraform-aws-iam-chamber-s3-role](https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role) - Terraform module to provision an IAM role with configurable permissions to access S3 as chamber backend.
+- [terraform-yaml-config](https://github.com/cloudposse/terraform-yaml-config) - Terraform module to convert local and remote YAML configuration templates into Terraform lists and maps.
 
 
 
