@@ -56,6 +56,9 @@ related:
   - name: "terraform-aws-iam-chamber-s3-role"
     description: "Terraform module to provision an IAM role with configurable permissions to access S3 as chamber backend."
     url: "https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role"
+  - name: "terraform-yaml-config"
+    description: "Terraform module to convert local and remote YAML configuration templates into Terraform lists and maps."
+    url: "https://github.com/cloudposse/terraform-yaml-config"
 
 # List any resources helpful for someone to get started. For example, link to the hashicorp documentation or AWS documentation.
 references:
