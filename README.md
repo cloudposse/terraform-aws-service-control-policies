@@ -64,7 +64,7 @@ We literally have [*hundreds of terraform modules*][terraform_modules] that are 
 
 Service Control Policies are configured in YAML configuration files.
 
-We maintain a comprehensive [catalog](catalog) of SCP configurations.
+We maintain a comprehensive [catalog](catalog) of SCP configurations and welcome contributions via pull request!
 
 The [example](examples/complete) in this module uses the catalog to provision the SCPs on AWS.
 
