@@ -9,3 +9,5 @@ stage = "test"
 name = "scp"
 
 service_control_policy_description = "Test Service Control Policy"
+
+service_control_policy_paths = ["../../catalog/*.yaml"]

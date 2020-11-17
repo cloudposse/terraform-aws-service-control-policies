@@ -86,13 +86,15 @@ references:
 
 # Short description of this project
 description: |-
-  Terraform module to provision Service Control Policies (SCP) for AWS Organizations and Organizational Units.
+  Terraform module to provision Service Control Policies (SCP) for AWS Organizations, Organizational Units, and AWS accounts.
 
 # Introduction to the project
 introduction: |-
   Service Control Policies are configured in YAML configuration files.
 
-  See [policies](examples/complete/policies) for Service Control Policies configuration examples.
+  We maintain a comprehensive [catalog](catalog) of SCP configurations.
+
+  The [example](examples/complete) in this module uses the catalog to provision the SCPs on AWS.
 
 # How to use this module. Should be an easy example to copy and paste.
 usage: |-
@@ -107,7 +109,7 @@ usage: |-
       source = "git::https://github.com/cloudposse/terraform-yaml-config.git?ref=master"
 
       list_config_local_base_path = path.module
-      list_config_paths           = ["policies/*.yaml"]
+      list_config_paths           = ["catalog/*.yaml"]
 
       context = module.this.context
     }
