@@ -10,7 +10,7 @@
   resources:
     - "*"
 
-- sid: "DenyRootAccess"
+- sid: "DenySagemakerWithoutRootAccess"
   effect: "Deny"
   actions:
     - "sagemaker:CreateNotebookInstance"
