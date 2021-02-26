@@ -1,0 +1,21 @@
+- sid: "DenyRegionUsage"
+  effect: "Deny"
+  not_actions:
+    - "cloudfront:*"
+    - "iam:*"
+    - "route53:*"
+    - "support:*"
+    - "organizations:*"
+    - "waf:*"
+    - "budgets:*"
+    - "globalaccelerator:*"
+    - "cur:*"
+    - "ce:*"
+    - "directconnect:*"
+  condition:
+    - test: "StringNotEqualsIgnoreCase"
+      variable: "aws:RequestedRegion"
+      values:
+        ${region_lockdown}
+  resources:
+    - "*"

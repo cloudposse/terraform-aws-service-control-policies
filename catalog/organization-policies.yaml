@@ -5,7 +5,6 @@
   resources:
     - "*"
 
-
 - sid: "DenyRootAccountAccess"
   effect: "Deny"
   actions:
@@ -17,4 +16,3 @@
       variable: "aws:PrincipalArn"
       values:
         - "arn:aws:iam::*:root"
-

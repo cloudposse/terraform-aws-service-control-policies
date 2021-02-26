@@ -1,0 +1,21 @@
+- sid: "DenyVpcFlowDelete"
+  effect: "Deny"
+  actions:
+    - "ec2:DeleteFlowLogs"
+    - "logs:DeleteLogGroup"
+    - "logs:DeleteLogStream"
+  resources:
+    - "*"
+
+- sid: "DenyVpcInternetAccess"
+  effect": "Deny"
+  actions:
+    - "ec2:AttachInternetGateway"
+    - "ec2:CreateInternetGateway"
+    - "ec2:CreateEgressOnlyInternetGateway"
+    - "ec2:CreateVpcPeeringConnection"
+    - "ec2:AcceptVpcPeeringConnection"
+    - "globalaccelerator:Create*"
+    - "globalaccelerator:Update*"
+  resources:
+    - "*"
