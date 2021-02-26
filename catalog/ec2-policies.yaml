@@ -1,5 +1,5 @@
 - sid: DenyEc2PublicAMI
-  effect: Deny
+  effect: "Deny"
   actions:
     - ec2:RunInstances
   condition:
@@ -11,7 +11,7 @@
     - arn:aws:ec2:*::image/*
 
 - sid: DenyEc2PublicIp
-  effect: Deny
+  effect: "Deny"
   actions:
     - ec2:RunInstances
   condition:
