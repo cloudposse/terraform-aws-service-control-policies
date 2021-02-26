@@ -73,10 +73,11 @@
   condition:
     - test: "StringNotLike"
       variable: "s3locationconstraint"
-      values: ${region_lockdown}
+      values:
+        - ${region_lockdown}
     - test: "Null"
       variable: "s3locationconstraint"
       values:
         - false
   resources:
-    "arn:aws:s3:::*"
+    - "arn:aws:s3:::*"
