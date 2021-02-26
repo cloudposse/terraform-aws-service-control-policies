@@ -45,7 +45,7 @@
 - sid: "DenyNoTLSRequests"
   effect: "Deny"
   actions:
-    - s"s3:*"
+    - "s3:*"
   condition:
     - test: "Bool"
       variable: "aws:SecureTransport"
