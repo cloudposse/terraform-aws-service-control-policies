@@ -15,5 +15,6 @@ service_control_policy_paths = ["../../catalog/*.yaml"]
 parameters = {
   ami_creator_account = "account_creator"
   ami_tag_key         = "ami_tag_key"
-  region_lockdown     = ["us-east-1", "eu-west-1"]
+  region1_lockdown    = "us-east-1"
+  region1_lockdown    = "eu-west-1"
 }

@@ -74,7 +74,8 @@
     - test: "StringNotLike"
       variable: "s3locationconstraint"
       values:
-        - ${region_lockdown}
+        - ${region1_lockdown}
+        - ${region2_lockdown}
     - test: "Null"
       variable: "s3locationconstraint"
       values:
