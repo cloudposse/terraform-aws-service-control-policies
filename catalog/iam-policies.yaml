@@ -37,6 +37,6 @@
     - test: "BoolIfExists"
       variable: "aws:MultiFactorAuthPresent"
       values:
-        false
+        - false
   resources:
     - "*"

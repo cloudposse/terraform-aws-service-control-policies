@@ -5,7 +5,7 @@
   condition:
     - test: Bool
       values:
-        - "true"
+        - true
       variable: ec2:Public
   resources:
     - arn:aws:ec2:*::image/*
@@ -17,7 +17,7 @@
   condition:
     - test: Bool
       values:
-        - "true"
+        - true
       variable: ec2:AssociatePublicIpAddress
   resources:
     - arn:aws:ec2:*:*:network-interface/*
@@ -57,7 +57,7 @@
     - test: "BoolIfExists"
       variable: "aws:MultiFactorAuthPresent"
       values:
-        - "false"
+        - false
   resources:
     - "*"
 

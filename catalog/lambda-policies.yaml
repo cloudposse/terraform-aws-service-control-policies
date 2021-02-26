@@ -7,6 +7,6 @@
     - test: "Null"
       variable: "lambda:VpcIds"
       values:
-        - "true"
+        - true
   resources:
     - "*"

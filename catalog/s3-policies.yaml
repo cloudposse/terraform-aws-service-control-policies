@@ -50,7 +50,7 @@
     - test: "Bool"
       variable: "aws:SecureTransport"
       values:
-        "false"
+        - false
   resources:
     - "arn:aws:s3:::*/*"
 
@@ -62,7 +62,7 @@
     - test: "BoolIfExists"
       variable: "aws:MultiFactorAuthPresent"
       values:
-        "false"
+        - false
   resources:
     - "arn:aws:s3:::*/*"
 
@@ -73,10 +73,10 @@
   condition:
     - test: "StringNotLike"
       variable: "s3locationconstraint"
-      values: var.region_lockdown
+      values: ${region_lockdown}
     - test: "Null"
       variable: "s3locationconstraint"
       values:
-        "false"
+        - false
   resources:
     "arn:aws:s3:::*"

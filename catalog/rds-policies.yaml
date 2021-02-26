@@ -11,6 +11,6 @@
     - test: "Bool"
       variable: "rds:StorageEncrypted"
       values:
-        - "false"
+        - false
   resources:
     - "*"
