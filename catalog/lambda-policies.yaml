@@ -1,0 +1,12 @@
+- sid: "RequireLambdaInVpc"
+  effect: "Deny"
+  actions:
+    - "lambda:CreateFunction"
+    - "lambda:UpdateFunctionConfiguration"
+  condition:
+    - test: "Null"
+      variable: "lambda:VpcIds"
+      values:
+        - "true"
+  resources:
+    - "*"

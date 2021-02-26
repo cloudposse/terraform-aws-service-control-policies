@@ -1,0 +1,88 @@
+- sid: DenyEc2PublicAMI
+  effect: Deny
+  actions:
+    - ec2:RunInstances
+  condition:
+    - test: Bool
+      values:
+        - "true"
+      variable: ec2:Public
+  resources:
+    - arn:aws:ec2:*::image/*
+
+- sid: DenyEc2PublicIp
+  effect: Deny
+  actions:
+    - ec2:RunInstances
+  condition:
+    - test: Bool
+      values:
+        - "true"
+      variable: ec2:AssociatePublicIpAddress
+  resources:
+    - arn:aws:ec2:*:*:network-interface/*
+
+
+- sid: DenyEc2PublicIp
+  effect: Deny
+  actions:
+    - ec2:RunInstances
+  condition:
+    - test: Bool
+      values:
+        - "true"
+      variable: ec2:AssociatePublicIpAddress
+  resources:
+    - arn:aws:ec2:*:*:network-interface/*
+
+
+- sid: "RequireAMIResourceTag"
+  effect: "Deny"
+  actions:
+    - "ec2:RunInstances"
+  condition:
+    - test: "StringNotEqualsIgnoreCase"
+      variable: "ec2:ResourceTag/${ami_tag_key}"
+      values:
+        - var.ami_tag_value
+  resources:
+    - "arn:aws:ec2:*::image/ami-*"
+
+
+- sid: "RequireIMDSv2"
+  effect: "Deny"
+  actions:
+    - "ec2:RunInstances"
+  condition:
+    - test: "StringNotEquals"
+      variable: "ec2:MetadataHttpTokens"
+      values:
+        - "required"
+  resources:
+    - "arn:aws:ec2:*:*:instance/*"
+
+- sid: "RequireMFAEC2"
+  effect: "Deny"
+  actions:
+    - "ec2:StopInstances"
+    - "ec2:TerminateInstances"
+    - "ec2:SendDiagnosticInterrupt"
+  condition:
+    - test: "BoolIfExists"
+      variable: "aws:MultiFactorAuthPresent"
+      values:
+        - "false"
+  resources:
+    - "*"
+
+- sid: "RestrictEC2AMI"
+  effect: "Deny"
+  actions:
+    - "ec2:RunInstances"
+  condition:
+    - test: "StringNotEquals"
+      variable: "ec2:Owner"
+      values:
+        ${ami_creator_account}
+  resources:
+    - "arn:aws:ec2:*::image/ami-*"

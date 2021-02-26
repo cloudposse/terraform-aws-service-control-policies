@@ -5,6 +5,8 @@ module "yaml_config" {
   list_config_local_base_path = path.module
   list_config_paths           = var.service_control_policy_paths
 
+  parameters = var.parameters
+
   context = module.this.context
 }
 

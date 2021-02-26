@@ -22,3 +22,29 @@
     - "iam:UpdateRoleDescription"
   resources:
     - "*"
+
+- sid: "DenyRegionDisableEnable"
+  effect: "Deny"
+  actions:
+    - "account:EnableRegion"
+    - "account:DisableRegion"
+  resources:
+     - "*"
+
+- sid: "RequireMFA"
+  effect: "Deny"
+  not_actions:
+    - "iam:CreateVirtualMFADevice"
+    - "iam:EnableMFADevice"
+    - "iam:GetUser"
+    - "iam:ListMFADevices"
+    - "iam:ListVirtualMFADevices"
+    - "iam:ResyncMFADevice"
+    - "sts:GetSessionToken"
+  resources:
+     - "*"
+  condition:
+     - test: "BoolIfExists"
+       variable: "aws:MultiFactorAuthPresent"
+       values:
+        - false

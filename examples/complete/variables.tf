@@ -13,3 +13,9 @@ variable "service_control_policy_paths" {
   type        = list(string)
   description = "List of paths to Service Control Policy configurations"
 }
+
+variable "parameters" {
+  type        = map(string)
+  description = "Map of parameters for interpolation within the YAML config templates"
+  default     = {}
+}
