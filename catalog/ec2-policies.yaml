@@ -22,20 +22,6 @@
   resources:
     - arn:aws:ec2:*:*:network-interface/*
 
-
-- sid: DenyEc2PublicIp
-  effect: Deny
-  actions:
-    - ec2:RunInstances
-  condition:
-    - test: Bool
-      values:
-        - "true"
-      variable: ec2:AssociatePublicIpAddress
-  resources:
-    - arn:aws:ec2:*:*:network-interface/*
-
-
 - sid: "RequireAMIResourceTag"
   effect: "Deny"
   actions:
