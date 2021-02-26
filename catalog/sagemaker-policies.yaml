@@ -1,4 +1,4 @@
-- sid: "DenyDirectInternetNotebook"
+- sid: "DenySagemakerDirectInternetNotebook"
   effect: "Deny"
   actions:
     - "sagemaker:CreateNotebookInstance"
@@ -23,7 +23,7 @@
   resources:
     - "*"
 
-- sid: "RequireInterContainerEncrypt"
+- sid: "RequireSagemakerInterContainerEncrypt"
   effect: "Deny"
   actions:
     - "sagemaker:CreateAutoMLJob"
@@ -43,7 +43,7 @@
   resources:
     - "*"
 
-- sid: "RequireVpcDomain"
+- sid: "RequireSagemakerVpcDomain"
   effect: "Deny"
   actions:
     - "sagemaker:CreateDomain"

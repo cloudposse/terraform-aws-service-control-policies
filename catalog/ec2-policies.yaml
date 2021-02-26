@@ -22,7 +22,7 @@
   resources:
     - arn:aws:ec2:*:*:network-interface/*
 
-- sid: "RequireAMIResourceTag"
+- sid: "RequireEc2AMIResourceTag"
   effect: "Deny"
   actions:
     - "ec2:RunInstances"
@@ -30,12 +30,12 @@
     - test: "StringNotEqualsIgnoreCase"
       variable: "ec2:ResourceTag/${ami_tag_key}"
       values:
-        - var.ami_tag_value
+        ${ami_tag_value}
   resources:
     - "arn:aws:ec2:*::image/ami-*"
 
 
-- sid: "RequireIMDSv2"
+- sid: "RequireEc2IMDSv2"
   effect: "Deny"
   actions:
     - "ec2:RunInstances"
@@ -47,7 +47,7 @@
   resources:
     - "arn:aws:ec2:*:*:instance/*"
 
-- sid: "RequireMFAEC2"
+- sid: "RequireEc2MFAEC2"
   effect: "Deny"
   actions:
     - "ec2:StopInstances"
@@ -61,7 +61,7 @@
   resources:
     - "*"
 
-- sid: "RestrictEC2AMI"
+- sid: "RestrictEc2AMI"
   effect: "Deny"
   actions:
     - "ec2:RunInstances"
