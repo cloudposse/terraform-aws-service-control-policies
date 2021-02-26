@@ -34,7 +34,6 @@
   resources:
     - "arn:aws:ec2:*::image/ami-*"
 
-
 - sid: "RequireEc2IMDSv2"
   effect: "Deny"
   actions:
