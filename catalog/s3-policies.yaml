@@ -7,7 +7,6 @@
   resources:
     - "*"
 
-
 - sid: "DenyS3BucketsPublicAccess"
   effect: "Deny"
   actions:
@@ -15,7 +14,6 @@
     - "s3:DeletePublicAccessBlock"
   resources:
     - "*"
-
 
 - sid: "DenyS3IncorrectEncryptionHeader"
   effect: "Deny"

@@ -16,5 +16,5 @@
     - "cloudwatch:PutDashboard"
     - "cloudwatch:PutMetricAlarm"
     - "cloudwatch:SetAlarmState"
-  resource":
+  resources:
     - "*"

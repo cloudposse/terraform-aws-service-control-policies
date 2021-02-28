@@ -6,7 +6,6 @@
   resources:
     - "*"
 
-
 - sid: "ProtectIAMRoles"
   effect: "Deny"
   actions:

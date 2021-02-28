@@ -8,7 +8,7 @@
     - "*"
 
 - sid: "DenyVpcInternetAccess"
-  effect": "Deny"
+  effect: "Deny"
   actions:
     - "ec2:AttachInternetGateway"
     - "ec2:CreateInternetGateway"

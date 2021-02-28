@@ -6,7 +6,7 @@
     - test: "StringNotEquals"
       variable: "sagemaker:DirectInternetAccess"
       values:
-        "Disabled"
+        - "Disabled"
   resources:
     - "*"
 
@@ -19,7 +19,7 @@
     - test: "StringNotEquals"
       variable: "sagemaker:RootAccess"
       values:
-        "Enabled"
+        - "Enabled"
   resources:
     - "*"
 
@@ -39,7 +39,7 @@
     - test: "Bool"
       variable: "sagemaker:InterContainerTrafficEncryption"
       values:
-        "false"
+        - false
   resources:
     - "*"
 
@@ -51,6 +51,6 @@
     - test: "StringEquals"
       variable: "sagemaker:AppNetworkAccessType"
       values:
-        "PublicInternetOnly"
+        - "PublicInternetOnly"
   resources:
     - "*"

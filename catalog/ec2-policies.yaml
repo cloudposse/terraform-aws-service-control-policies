@@ -1,26 +1,26 @@
-- sid: DenyEc2PublicAMI
+- sid: "DenyEc2PublicAMI"
   effect: "Deny"
   actions:
-    - ec2:RunInstances
+    - "ec2:RunInstances"
   condition:
-    - test: Bool
+    - test: "Bool"
+      variable: "ec2:Public"
       values:
         - true
-      variable: ec2:Public
   resources:
-    - arn:aws:ec2:*::image/*
+    - "arn:aws:ec2:*::image/*"
 
-- sid: DenyEc2PublicIp
+- sid: "DenyEc2PublicIp"
   effect: "Deny"
   actions:
-    - ec2:RunInstances
+    - "ec2:RunInstances"
   condition:
-    - test: Bool
+    - test: "Bool"
+      variable: "ec2:AssociatePublicIpAddress"
       values:
         - true
-      variable: ec2:AssociatePublicIpAddress
   resources:
-    - arn:aws:ec2:*:*:network-interface/*
+    - "arn:aws:ec2:*:*:network-interface/*"
 
 - sid: "RequireEc2AMIResourceTag"
   effect: "Deny"
@@ -30,7 +30,7 @@
     - test: "StringNotEqualsIgnoreCase"
       variable: "ec2:ResourceTag/${ami_tag_key}"
       values:
-        ${ami_tag_value}
+        - "${ami_tag_value}"
   resources:
     - "arn:aws:ec2:*::image/ami-*"
 
@@ -68,6 +68,6 @@
     - test: "StringNotEquals"
       variable: "ec2:Owner"
       values:
-        ${ami_creator_account}
+        - "${ami_creator_account}"
   resources:
     - "arn:aws:ec2:*::image/ami-*"
