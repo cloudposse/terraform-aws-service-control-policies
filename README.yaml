@@ -83,7 +83,9 @@ references:
   - name: "Terraform Version Pinning"
     description: "The required_version setting can be used to constrain which versions of the Terraform CLI can be used with your configuration"
     url: "https://www.terraform.io/docs/configuration/terraform.html#specifying-a-required-terraform-version"
-
+  - name: "SCPs size limits"
+    description: "The SCP have a size limit and creating many policies at once can result in a POLICY_CONTENT_LIMIT_EXCEEDED error"
+    url: "https://github.com/hashicorp/terraform-provider-aws/issues/12597"
 # Short description of this project
 description: |-
   Terraform module to provision Service Control Policies (SCP) for AWS Organizations, Organizational Units, and AWS accounts.
@@ -148,3 +150,5 @@ contributors:
     github: "osterman"
   - name: "Andriy Knysh"
     github: "aknysh"
+  - name: "PePe Amengual"
+    github: "jamengual"
