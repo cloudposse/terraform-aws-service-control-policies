@@ -16,6 +16,6 @@ parameters = {
   ami_creator_account = "account_creator"
   ami_tag_key         = "ami_tag_key"
   ami_tag_value       = "ami_tag_value"
-  region1_lockdown     = "us-east-1"
+  region1_lockdown    = "us-east-1"
   region2_lockdown    = "eu-west-1"
 }
