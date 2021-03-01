@@ -1,3 +1,85 @@
+#
+# This policy denies instance types that aren't based on the Nitro system as documented in the following document:
+# https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+#
+- sid: "DenyNonNitroInstances"
+  effect: "Deny"
+  actions:
+    - "ec2:RunInstances"
+  condition:
+    - test: "StringNotLike"
+      variable: "ec2:InstanceType"
+      values:
+        - a1
+        - a1.metal
+        - c5
+        - c5.metal
+        - c5a
+        - c5ad
+        - c5d
+        - c5d.metal
+        - c5n
+        - c5n.metal
+        - c6g
+        - c6g.metal
+        - c6gd
+        - c6gd.metal
+        - c6gn
+        - d3
+        - d3en
+        - g4
+        - i3.metal
+        - i3en
+        - i3en.metal
+        - inf1
+        - m5
+        - m5.metal
+        - m5a
+        - m5ad
+        - m5d
+        - m5d.metal
+        - m5dn
+        - m5dn.metal
+        - m5n
+        - m5n.metal
+        - m5zn
+        - m5zn.metal
+        - m6g
+        - m6g.metal
+        - m6gd
+        - m6gd.metal
+        - mac1.metal
+        - p3dn.24xlarge
+        - p4
+        - r5
+        - r5.metal
+        - r5a
+        - r5ad
+        - r5b
+        - r5b.metal
+        - r5d
+        - r5d.metal
+        - r5dn
+        - r5dn.metal
+        - r5n
+        - r5n.metal
+        - r6g
+        - r6g.metal
+        - r6gd
+        - r6gd.metal
+        - t3
+        - t3a
+        - t4g
+        - u-12tb1.metal
+        - u-18tb1.metal
+        - u-24tb1.metal
+        - u-6tb1.metal
+        - u-9tb1.metal
+        - z1d
+        - z1d.metal
+  resources:
+    - "arn:aws:ec2:*:*:instance/*"
+
 - sid: "DenyEc2PublicAMI"
   effect: "Deny"
   actions:
@@ -9,4 +91,66 @@
         - true
   resources:
     - "arn:aws:ec2:*::image/*"
+
+- sid: "DenyEc2PublicIp"
+  effect: "Deny"
+  actions:
+    - "ec2:RunInstances"
+  condition:
+    - test: "Bool"
+      variable: "ec2:AssociatePublicIpAddress"
+      values:
+        - true
+  resources:
+    - "arn:aws:ec2:*:*:network-interface/*"
+
+- sid: "RequireEc2AMIResourceTag"
+  effect: "Deny"
+  actions:
+    - "ec2:RunInstances"
+  condition:
+    - test: "StringNotEqualsIgnoreCase"
+      variable: "ec2:ResourceTag/${ami_tag_key}"
+      values:
+        - "${ami_tag_value}"
+  resources:
+    - "arn:aws:ec2:*::image/ami-*"
+
+- sid: "RequireEc2IMDSv2"
+  effect: "Deny"
+  actions:
+    - "ec2:RunInstances"
+  condition:
+    - test: "StringNotEquals"
+      variable: "ec2:MetadataHttpTokens"
+      values:
+        - "required"
+  resources:
+    - "arn:aws:ec2:*:*:instance/*"
+
+- sid: "RequireEc2MFAEC2"
+  effect: "Deny"
+  actions:
+    - "ec2:StopInstances"
+    - "ec2:TerminateInstances"
+    - "ec2:SendDiagnosticInterrupt"
+  condition:
+    - test: "BoolIfExists"
+      variable: "aws:MultiFactorAuthPresent"
+      values:
+        - false
+  resources:
+    - "*"
+
+- sid: "RestrictEc2AMI"
+  effect: "Deny"
+  actions:
+    - "ec2:RunInstances"
+  condition:
+    - test: "StringNotEquals"
+      variable: "ec2:Owner"
+      values:
+        - "${ami_creator_account}"
+  resources:
+    - "arn:aws:ec2:*::image/ami-*"
 
