@@ -170,6 +170,20 @@ Available targets:
 |------|---------|
 | aws | >= 3.0 |
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| this | cloudposse/label/null | 0.24.1 |
+
+## Resources
+
+| Name |
+|------|
+| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) |
+| [aws_organizations_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_policy) |
+| [aws_organizations_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_policy_attachment) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -199,7 +213,6 @@ Available targets:
 |------|-------------|
 | organizations\_policy\_arn | Amazon Resource Name (ARN) of the policy |
 | organizations\_policy\_id | The unique identifier of the policy |
-
 <!-- markdownlint-restore -->
 
 
