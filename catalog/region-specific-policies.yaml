@@ -16,7 +16,7 @@
     - test: "StringNotEqualsIgnoreCase"
       variable: "aws:RequestedRegion"
       values:
-        - ${region1_lockdown}
-        - ${region2_lockdown}
+        - "${region1_lockdown}"
+        - "${region2_lockdown}"
   resources:
     - "*"

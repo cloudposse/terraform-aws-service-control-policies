@@ -13,7 +13,7 @@ module "yaml_config" {
     "../../catalog/guardduty-policies.yaml",
     "../../catalog/iam-policies.yaml",
     "../../catalog/kms-policies.yaml",
-    "../../catalog/lambda-policies.yaml"
+    "../../catalog/region-specific-policies.yaml"
   ]
 
   parameters = var.parameters
