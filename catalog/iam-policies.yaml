@@ -1,4 +1,4 @@
-- sid: "DenyCreatingIAMUsers"
+- sid: "DenyIAMCreatingUsers"
   effect: "Deny"
   actions:
     - "iam:CreateUser"
@@ -22,7 +22,7 @@
   resources:
     - "*"
 
-- sid: "RequireMFA"
+- sid: "RequireIAMMFA"
   effect: "Deny"
   not_actions:
     - "iam:CreateVirtualMFADevice"

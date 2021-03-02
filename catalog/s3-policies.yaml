@@ -40,25 +40,13 @@
   resources:
     - "*"
 
-- sid: "DenyNoTLSRequests"
+- sid: "DenyS3NoTLSRequests"
   effect: "Deny"
   actions:
     - "s3:*"
   condition:
     - test: "Bool"
       variable: "aws:SecureTransport"
-      values:
-        - false
-  resources:
-    - "arn:aws:s3:::*/*"
-
-- sid: "RequireMFAS3Delete"
-  effect: "Deny"
-  actions:
-    - "s3:DeleteObject"
-  condition:
-    - test: "BoolIfExists"
-      variable: "aws:MultiFactorAuthPresent"
       values:
         - false
   resources:
@@ -72,6 +60,7 @@
     - test: "StringNotLike"
       variable: "s3locationconstraint"
       values:
+        # The regions that the creation of buckets will be Denied
         - ${region1_lockdown}
         - ${region2_lockdown}
     - test: "Null"

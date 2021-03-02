@@ -10,7 +10,18 @@ name = "scp"
 
 service_control_policy_description = "Test Service Control Policy"
 
-service_control_policy_paths = ["../../catalog/*.yaml"]
+list_config_paths = [
+  "../../catalog/account-policies.yaml",
+  "../../catalog/cloudtrail-policies.yaml",
+  "../../catalog/cloudwatch-logs-policies.yaml",
+  "../../catalog/config-policies.yaml",
+  "../../catalog/deny-all-policies.yaml",
+  "../../catalog/ec2-policies.yaml",
+  "../../catalog/guardduty-policies.yaml",
+  "../../catalog/iam-policies.yaml",
+  "../../catalog/kms-policies.yaml",
+  "../../catalog/region-specific-policies.yaml"
+]
 
 parameters = {
   ami_creator_account = "account_creator"
