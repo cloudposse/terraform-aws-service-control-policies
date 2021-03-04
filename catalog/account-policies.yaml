@@ -1,4 +1,4 @@
-- sid: "DenyRegionDisableEnable"
+- sid: "DenyAccountRegionDisableEnable"
   effect: "Deny"
   actions:
     - "account:EnableRegion"

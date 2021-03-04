@@ -1,4 +1,4 @@
-- sid: "DenyRdsUnencryptedRds"
+- sid: "DenyRDSUnencrypted"
   effect: "Deny"
   actions:
     - "rds:CreateDBCluster"
