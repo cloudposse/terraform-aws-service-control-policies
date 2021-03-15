@@ -80,6 +80,36 @@
   resources:
     - "arn:aws:ec2:*:*:instance/*"
 
+# This policy denies instance types that aren't based on the Nitro system and don't support Encryption-in-Transit as
+# described in the following document:
+# https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data-protection.html#encryption-transit
+- sid: "DenyInstancesWithoutEncryptionInTransit"
+  effect: "Deny"
+  actions:
+    - "ec2:RunInstances"
+  condition:
+    - test: "StringNotLike"
+      variable: "ec2:InstanceType"
+      values:
+        - c5a
+        - c5ad
+        - c5n
+        - c6gn
+        - d3
+        - d3en
+        - g4ad
+        - g4dn
+        - i3en
+        - m5dn
+        - m5n
+        - m5zn
+        - p3dn
+        - p4d
+        - r5dn
+        - r5n
+  resources:
+    - "arn:aws:ec2:*:*:instance/*"
+
 - sid: "DenyEc2PublicAMI"
   effect: "Deny"
   actions:
@@ -153,4 +183,3 @@
         - "${ami_creator_account}"
   resources:
     - "arn:aws:ec2:*::image/ami-*"
-
