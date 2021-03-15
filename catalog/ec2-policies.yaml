@@ -158,7 +158,7 @@
   resources:
     - "arn:aws:ec2:*:*:instance/*"
 
-- sid: "RequireEc2MFAEC2"
+- sid: "RequireEc2MFA"
   effect: "Deny"
   actions:
     - "ec2:StopInstances"
