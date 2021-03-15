@@ -7,7 +7,7 @@
   resources:
     - "*"
 
-- sid: "DenyDisablingCloudwatch"
+- sid: "DenyDisabling CloudWatch"
   effect: "Deny"
   actions:
     - "cloudwatch:DeleteAlarms"
