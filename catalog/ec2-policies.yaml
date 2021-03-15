@@ -122,7 +122,7 @@
   resources:
     - "arn:aws:ec2:*::image/*"
 
-- sid: "DenyEc2PublicIp"
+- sid: "DenyEc2AssociatePublicIp"
   effect: "Deny"
   actions:
     - "ec2:RunInstances"
