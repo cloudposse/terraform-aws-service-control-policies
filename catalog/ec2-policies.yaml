@@ -80,7 +80,6 @@
   resources:
     - "arn:aws:ec2:*:*:instance/*"
 
-  #
 # This policy denies instance types that aren't based on the Nitro system and don't support Encryption-in-Transit as
 # described in the following document:
 # https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data-protection.html#encryption-transit
