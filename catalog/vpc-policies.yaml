@@ -1,4 +1,4 @@
-- sid: "DenyDeletingVpcFlowLogs"
+- sid: "DenyVpcDeletingFlowLogs"
   effect: "Deny"
   actions:
     - "ec2:DeleteFlowLogs"

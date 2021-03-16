@@ -6,7 +6,7 @@
   resources:
     - "*"
 
-- sid: "ProtectIAMRoles"
+- sid: "DenyIAMRolesChanges"
   effect: "Deny"
   actions:
     - "iam:AttachRolePolicy"
@@ -22,7 +22,7 @@
   resources:
     - "*"
 
-- sid: "RequireIAMMFA"
+- sid: "DenyIAMNoMFA"
   effect: "Deny"
   not_actions:
     - "iam:CreateVirtualMFADevice"
@@ -40,7 +40,7 @@
   resources:
     - "*"
 
-- sid: "RestrictIAMForRoot"
+- sid: "DenyIAMRootAccount"
   effect: "Deny"
   actions:
     - "*"

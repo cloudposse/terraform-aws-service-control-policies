@@ -2,7 +2,7 @@
 # This policy denies instance types that aren't based on the Nitro system as documented in the following document:
 # https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
 #
-- sid: "DenyNonNitroInstances"
+- sid: "DenyEC2NonNitroInstances"
   effect: "Deny"
   actions:
     - "ec2:RunInstances"
@@ -83,7 +83,7 @@
 # This policy denies instance types that aren't based on the Nitro system and don't support Encryption-in-Transit as
 # described in the following document:
 # https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data-protection.html#encryption-transit
-- sid: "DenyInstancesWithoutEncryptionInTransit"
+- sid: "DenyEC2InstancesWithoutEncryptionInTransit"
   effect: "Deny"
   actions:
     - "ec2:RunInstances"
@@ -110,7 +110,7 @@
   resources:
     - "arn:aws:ec2:*:*:instance/*"
 
-- sid: "DenyEc2PublicAMI"
+- sid: "DenyEC2PublicAMI"
   effect: "Deny"
   actions:
     - "ec2:RunInstances"
@@ -122,7 +122,7 @@
   resources:
     - "arn:aws:ec2:*::image/*"
 
-- sid: "DenyEc2AssociatePublicIp"
+- sid: "DenyEC2AssociatePublicIp"
   effect: "Deny"
   actions:
     - "ec2:RunInstances"
@@ -134,7 +134,7 @@
   resources:
     - "arn:aws:ec2:*:*:network-interface/*"
 
-- sid: "RequireEc2AMIResourceTag"
+- sid: "DenyEC2AMIWithNoResourceTag"
   effect: "Deny"
   actions:
     - "ec2:RunInstances"
@@ -146,7 +146,7 @@
   resources:
     - "arn:aws:ec2:*::image/ami-*"
 
-- sid: "RequireEc2IMDSv2"
+- sid: "DenyEC2WithNoIMDSv2"
   effect: "Deny"
   actions:
     - "ec2:RunInstances"
@@ -158,7 +158,7 @@
   resources:
     - "arn:aws:ec2:*:*:instance/*"
 
-- sid: "RequireEc2MFA"
+- sid: "DenyEC2ApiWithNoMFA"
   effect: "Deny"
   actions:
     - "ec2:StopInstances"
@@ -172,7 +172,7 @@
   resources:
     - "*"
 
-- sid: "RestrictEc2AMI"
+- sid: "DenyEC2AMINotCreatedBy"
   effect: "Deny"
   actions:
     - "ec2:RunInstances"

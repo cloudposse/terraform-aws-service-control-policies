@@ -1,4 +1,4 @@
-- sid: "ProtectS3Buckets"
+- sid: "DenyS3DeleteBucketsAndObjects"
   effect: "Deny"
   actions:
     - "s3:DeleteBucket"
@@ -40,7 +40,7 @@
   resources:
     - "*"
 
-- sid: "S3RegionLockdown"
+- sid: "DenyS3InNonSelectedRegion"
   effect: "Deny"
   actions:
     - "s3:CreateBucket"

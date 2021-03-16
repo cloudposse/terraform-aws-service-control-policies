@@ -23,7 +23,7 @@
   resources:
     - "*"
 
-- sid: "RequireSagemakerInterContainerEncrypt"
+- sid: "DenySagemakerWithoutInterContainerEncrypt"
   effect: "Deny"
   actions:
     - "sagemaker:CreateAutoMLJob"
@@ -43,7 +43,7 @@
   resources:
     - "*"
 
-- sid: "RequireSagemakerVpcDomain"
+- sid: "DenyeSagemakerWithoutVpcDomain"
   effect: "Deny"
   actions:
     - "sagemaker:CreateDomain"
