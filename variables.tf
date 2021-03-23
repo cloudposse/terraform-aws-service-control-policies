@@ -15,6 +15,6 @@ variable "target_id" {
 }
 
 variable "region_lockdown" {
-  type = List
-  default = ["eu-central-1", "eu-west-1" ]
+  type    = List
+  default = ["eu-central-1", "eu-west-1"]
 }
