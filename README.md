@@ -201,6 +201,7 @@ Available targets:
 | name | Solution name, e.g. 'app' or 'jenkins' | `string` | `null` | no |
 | namespace | Namespace, which could be your organization name or abbreviation, e.g. 'eg' or 'cp' | `string` | `null` | no |
 | regex\_replace\_chars | Regex to replace chars with empty string in `namespace`, `environment`, `stage` and `name`.<br>If not set, `"/[^a-zA-Z0-9-]/"` is used to remove all characters other than hyphens, letters and digits. | `string` | `null` | no |
+| region\_lockdown | n/a | `List` | <pre>[<br>  "eu-central-1",<br>  "eu-west-1"<br>]</pre> | no |
 | service\_control\_policy\_description | Description of the combined Service Control Policy | `string` | `null` | no |
 | service\_control\_policy\_statements | List of Service Control Policy statements | `any` | n/a | yes |
 | stage | Stage, e.g. 'prod', 'staging', 'dev', OR 'source', 'build', 'test', 'deploy', 'release' | `string` | `null` | no |
