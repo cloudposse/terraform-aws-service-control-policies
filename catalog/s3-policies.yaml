@@ -49,8 +49,7 @@
       variable: "s3locationconstraint"
       values:
         # The regions that the creation of buckets will be Denied
-        - ${region1_lockdown}
-        - ${region2_lockdown}
+        ["${s3_regions_lockdown}"]
     - test: "Null"
       variable: "s3locationconstraint"
       values:

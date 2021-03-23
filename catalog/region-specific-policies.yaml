@@ -46,6 +46,6 @@
       variable: "aws:RequestedRegion"
       values:
         # List of allowed regions
-        - "${var.region_lockdown}"
+        ["${regions_lockdown}"]
   resources:
     - "*"

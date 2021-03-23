@@ -13,8 +13,3 @@ variable "target_id" {
   type        = string
   description = "The unique identifier (ID) of the organization root, organizational unit, or account number that you want to attach the policy to"
 }
-
-variable "region_lockdown" {
-  type = List
-  default = ["eu-central-1", "eu-west-1" ]
-}
