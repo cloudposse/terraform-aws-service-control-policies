@@ -47,9 +47,11 @@
   condition:
     - test: "StringNotLike"
       variable: "s3locationconstraint"
+      # The regions that the creation of buckets will be Denied
       values:
-        # The regions that the creation of buckets will be Denied
-        ["${s3_regions_lockdown}"]
+      %{ for r in split(",", s3_regions_lockdown) }
+        - ${trimspace(r)}
+      %{ endfor }
     - test: "Null"
       variable: "s3locationconstraint"
       values:

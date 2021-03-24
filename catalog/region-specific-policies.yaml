@@ -44,8 +44,10 @@
   condition:
     - test: "StringNotEqualsIgnoreCase"
       variable: "aws:RequestedRegion"
+      # List of allowed regions
       values:
-        # List of allowed regions
-        ["${regions_lockdown}"]
+      %{ for r in split(",", regions_lockdown) }
+        - ${trimspace(r)}
+      %{ endfor }
   resources:
     - "*"
