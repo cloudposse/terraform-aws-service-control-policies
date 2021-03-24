@@ -27,6 +27,6 @@ parameters = {
   ami_creator_account = "account_creator"
   ami_tag_key         = "ami_tag_key"
   ami_tag_value       = "ami_tag_value"
-  regions_lockdown    = "denied_region_1, denied_region_2"
-  s3_regions_lockdown = "denied_s3_region_1, denied_s3_region_2"
+  regions_lockdown    = "eu-central-1, eu-west-1"
+  s3_regions_lockdown = "eu-central-1, eu-west-1"
 }
