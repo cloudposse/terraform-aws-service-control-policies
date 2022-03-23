@@ -5,11 +5,6 @@
     - "cloudtrail:PutEventSelectors"
     - "cloudtrail:StopLogging"
     - "cloudtrail:UpdateTrail"
-    
-- sid: "DenyDisablingCloudTrail"
-  effect: "Deny"
-  actions:
-    - "cloudtrail:StopLogging"
-    - "cloudtrail:DeleteTrail"
   resources:
     - "*"
+    
