@@ -10,73 +10,51 @@
     - test: "StringNotLike"
       variable: "ec2:InstanceType"
       values:
-        - a1
-        - a1.metal
-        - c5
-        - c5.metal
-        - c5a
-        - c5ad
-        - c5d
-        - c5d.metal
-        - c5n
-        - c5n.metal
-        - c6g
-        - c6g.metal
-        - c6gd
-        - c6gd.metal
-        - c6gn
-        - d3
-        - d3en
-        - g4
+        - a1.*
+        - c5.*
+        - c5a.*
+        - c5ad.*
+        - c5d.*
+        - c5n.*
+        - c6g.*
+        - c6gd.*
+        - c6gn.*
+        - d3.*
+        - d3en.*
+        - g4.*
         - i3.metal
-        - i3en
-        - i3en.metal
-        - inf1
-        - m5
-        - m5.metal
-        - m5a
-        - m5ad
-        - m5d
-        - m5d.metal
-        - m5dn
-        - m5dn.metal
-        - m5n
-        - m5n.metal
-        - m5zn
-        - m5zn.metal
-        - m6g
-        - m6g.metal
-        - m6gd
-        - m6gd.metal
+        - i3en.*
+        - inf1.*
+        - m5.*
+        - m5a.*
+        - m5ad.*
+        - m5d.*
+        - m5dn.*
+        - m5n.*
+        - m5zn.*
+        - m6g.*
+        - m6gd.*
         - mac1.metal
         - p3dn.24xlarge
-        - p4
-        - r5
-        - r5.metal
-        - r5a
-        - r5ad
-        - r5b
-        - r5b.metal
-        - r5d
-        - r5d.metal
-        - r5dn
-        - r5dn.metal
-        - r5n
-        - r5n.metal
-        - r6g
-        - r6g.metal
-        - r6gd
-        - r6gd.metal
-        - t3
-        - t3a
-        - t4g
+        - p4.*
+        - r5.*
+        - r5a.*
+        - r5ad.*
+        - r5b.*
+        - r5d.*
+        - r5dn.*
+        - r5n.*
+        - r6g.*
+        - r6gd.*
+        - t3.*
+        - t3a.*
+        - t4g.*
         - u-12tb1.metal
         - u-18tb1.metal
         - u-24tb1.metal
         - u-6tb1.metal
         - u-9tb1.metal
-        - z1d
-        - z1d.metal
+        - z1d.*
   resources:
     - "arn:aws:ec2:*:*:instance/*"
 
@@ -91,22 +69,22 @@
     - test: "StringNotLike"
       variable: "ec2:InstanceType"
       values:
-        - c5a
-        - c5ad
-        - c5n
-        - c6gn
-        - d3
-        - d3en
-        - g4ad
-        - g4dn
-        - i3en
-        - m5dn
-        - m5n
-        - m5zn
-        - p3dn
-        - p4d
-        - r5dn
-        - r5n
+        - c5a.*
+        - c5ad.*
+        - c5n.*
+        - c6gn.*
+        - d3.*
+        - d3en.*
+        - g4ad.*
+        - g4dn.*
+        - i3en.*
+        - m5dn.*
+        - m5n.*
+        - m5zn.*
+        - p3dn.*
+        - p4d.*
+        - r5dn.*
+        - r5n.*
   resources:
     - "arn:aws:ec2:*:*:instance/*"
 

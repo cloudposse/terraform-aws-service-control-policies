@@ -35,7 +35,7 @@ data "aws_iam_policy_document" "this" {
 }
 
 resource "aws_organizations_policy" "this" {
-  count       = module.this.enabled ? 1 : 0
+  count       = module.this.enabled && length(var.service_control_policy_statements) > 0 ? 1 : 0
   name        = module.this.id
   description = var.service_control_policy_description
   content     = local.service_control_policy_json
@@ -43,7 +43,7 @@ resource "aws_organizations_policy" "this" {
 }
 
 resource "aws_organizations_policy_attachment" "this" {
-  count     = module.this.enabled ? 1 : 0
+  count     = module.this.enabled && length(var.service_control_policy_statements) > 0 ? 1 : 0
   policy_id = join("", aws_organizations_policy.this.*.id)
   target_id = var.target_id
 }
