@@ -1,4 +1,4 @@
-- sid: "DenyCreatingIAMUsers"
+- sid: "DenyIAMCreatingUsers"
   effect: "Deny"
   actions:
     - "iam:CreateUser"
@@ -6,8 +6,7 @@
   resources:
     - "*"
 
-
-- sid: "ProtectIAMRoles"
+- sid: "DenyIAMRolesChanges"
   effect: "Deny"
   actions:
     - "iam:AttachRolePolicy"
@@ -20,5 +19,35 @@
     - "iam:UpdateAssumeRolePolicy"
     - "iam:UpdateRole"
     - "iam:UpdateRoleDescription"
+  resources:
+    - "*"
+
+- sid: "DenyIAMNoMFA"
+  effect: "Deny"
+  not_actions:
+    - "iam:CreateVirtualMFADevice"
+    - "iam:EnableMFADevice"
+    - "iam:GetUser"
+    - "iam:ListMFADevices"
+    - "iam:ListVirtualMFADevices"
+    - "iam:ResyncMFADevice"
+    - "sts:GetSessionToken"
+  condition:
+    - test: "BoolIfExists"
+      variable: "aws:MultiFactorAuthPresent"
+      values:
+        - false
+  resources:
+    - "*"
+
+- sid: "DenyIAMRootAccount"
+  effect: "Deny"
+  actions:
+    - "*"
+  condition:
+    - test: "StringLike"
+      variable: "aws:PrincipalArn"
+      values:
+        - "arn:aws:iam::*:root"
   resources:
     - "*"

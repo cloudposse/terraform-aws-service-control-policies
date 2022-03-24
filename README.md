@@ -249,6 +249,7 @@ For additional context, refer to some of these links.
 - [Terraform Module Requirements](https://www.terraform.io/docs/registry/modules/publish.html#requirements) - HashiCorp's guidance on all the requirements for publishing a module. Meeting the requirements for publishing a module is extremely easy.
 - [Terraform `random_integer` Resource](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/integer) - The resource random_integer generates random values from a given range, described by the min and max attributes of a given resource.
 - [Terraform Version Pinning](https://www.terraform.io/docs/configuration/terraform.html#specifying-a-required-terraform-version) - The required_version setting can be used to constrain which versions of the Terraform CLI can be used with your configuration
+- [SCPs size limits](https://github.com/hashicorp/terraform-provider-aws/issues/12597) - The SCP have a size limit and creating many policies at once can result in a POLICY_CONTENT_LIMIT_EXCEEDED error
 
 
 ## Help
@@ -383,14 +384,16 @@ Check out [our other projects][github], [follow us on twitter][twitter], [apply 
 ### Contributors
 
 <!-- markdownlint-disable -->
-|  [![Erik Osterman][osterman_avatar]][osterman_homepage]<br/>[Erik Osterman][osterman_homepage] | [![Andriy Knysh][aknysh_avatar]][aknysh_homepage]<br/>[Andriy Knysh][aknysh_homepage] |
-|---|---|
+|  [![Erik Osterman][osterman_avatar]][osterman_homepage]<br/>[Erik Osterman][osterman_homepage] | [![Andriy Knysh][aknysh_avatar]][aknysh_homepage]<br/>[Andriy Knysh][aknysh_homepage] | [![PePe Amengual][jamengual_avatar]][jamengual_homepage]<br/>[PePe Amengual][jamengual_homepage] |
+|---|---|---|
 <!-- markdownlint-restore -->
 
   [osterman_homepage]: https://github.com/osterman
   [osterman_avatar]: https://img.cloudposse.com/150x150/https://github.com/osterman.png
   [aknysh_homepage]: https://github.com/aknysh
   [aknysh_avatar]: https://img.cloudposse.com/150x150/https://github.com/aknysh.png
+  [jamengual_homepage]: https://github.com/jamengual
+  [jamengual_avatar]: https://img.cloudposse.com/150x150/https://github.com/jamengual.png
 
 [![README Footer][readme_footer_img]][readme_footer_link]
 [![Beacon][beacon]][website]

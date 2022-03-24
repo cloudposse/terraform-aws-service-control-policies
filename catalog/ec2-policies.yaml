@@ -2,7 +2,7 @@
 # This policy denies instance types that aren't based on the Nitro system as documented in the following document:
 # https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
 #
-- sid: "DenyNonNitroInstances"
+- sid: "DenyEC2NonNitroInstances"
   effect: "Deny"
   actions:
     - "ec2:RunInstances"
@@ -61,7 +61,7 @@
 # This policy denies instance types that aren't based on the Nitro system and don't support Encryption-in-Transit as
 # described in the following document:
 # https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data-protection.html#encryption-transit
-- sid: "DenyInstancesWithoutEncryptionInTransit"
+- sid: "DenyEC2InstancesWithoutEncryptionInTransit"
   effect: "Deny"
   actions:
     - "ec2:RunInstances"
@@ -87,3 +87,77 @@
         - r5n.*
   resources:
     - "arn:aws:ec2:*:*:instance/*"
+
+- sid: "DenyEC2PublicAMI"
+  effect: "Deny"
+  actions:
+    - "ec2:RunInstances"
+  condition:
+    - test: "Bool"
+      variable: "ec2:Public"
+      values:
+        - true
+  resources:
+    - "arn:aws:ec2:*::image/*"
+
+- sid: "DenyEC2AssociatePublicIp"
+  effect: "Deny"
+  actions:
+    - "ec2:RunInstances"
+  condition:
+    - test: "Bool"
+      variable: "ec2:AssociatePublicIpAddress"
+      values:
+        - true
+  resources:
+    - "arn:aws:ec2:*:*:network-interface/*"
+
+- sid: "DenyEC2AMIWithNoResourceTag"
+  effect: "Deny"
+  actions:
+    - "ec2:RunInstances"
+  condition:
+    - test: "StringNotEqualsIgnoreCase"
+      variable: "ec2:ResourceTag/${ami_tag_key}"
+      values:
+        - "${ami_tag_value}"
+  resources:
+    - "arn:aws:ec2:*::image/ami-*"
+
+- sid: "DenyEC2WithNoIMDSv2"
+  effect: "Deny"
+  actions:
+    - "ec2:RunInstances"
+  condition:
+    - test: "StringNotEquals"
+      variable: "ec2:MetadataHttpTokens"
+      values:
+        - "required"
+  resources:
+    - "arn:aws:ec2:*:*:instance/*"
+
+- sid: "DenyEC2ApiWithNoMFA"
+  effect: "Deny"
+  actions:
+    - "ec2:StopInstances"
+    - "ec2:TerminateInstances"
+    - "ec2:SendDiagnosticInterrupt"
+  condition:
+    - test: "BoolIfExists"
+      variable: "aws:MultiFactorAuthPresent"
+      values:
+        - false
+  resources:
+    - "*"
+
+- sid: "DenyEC2AMINotCreatedBy"
+  effect: "Deny"
+  actions:
+    - "ec2:RunInstances"
+  condition:
+    - test: "StringNotEquals"
+      variable: "ec2:Owner"
+      values:
+        - "${ami_creator_account}"
+  resources:
+    - "arn:aws:ec2:*::image/ami-*"

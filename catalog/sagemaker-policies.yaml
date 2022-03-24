@@ -1,0 +1,56 @@
+- sid: "DenySagemakerDirectInternetNotebook"
+  effect: "Deny"
+  actions:
+    - "sagemaker:CreateNotebookInstance"
+  condition:
+    - test: "StringNotEquals"
+      variable: "sagemaker:DirectInternetAccess"
+      values:
+        - "Disabled"
+  resources:
+    - "*"
+
+- sid: "DenySagemakerWithoutRootAccess"
+  effect: "Deny"
+  actions:
+    - "sagemaker:CreateNotebookInstance"
+    - "sagemaker:UpdateNotebookInstance"
+  condition:
+    - test: "StringNotEquals"
+      variable: "sagemaker:RootAccess"
+      values:
+        - "Enabled"
+  resources:
+    - "*"
+
+- sid: "DenySagemakerWithoutInterContainerEncrypt"
+  effect: "Deny"
+  actions:
+    - "sagemaker:CreateAutoMLJob"
+    - "sagemaker:CreateDataQualityJobDefinition"
+    - "sagemaker:CreateHyperParameterTuningJob"
+    - "sagemaker:CreateModelBiasJobDefinition"
+    - "sagemaker:CreateModelExplainabilityJobDefinition"
+    - "sagemaker:CreateModelQualityJobDefinition"
+    - "sagemaker:CreateMonitoringSchedule"
+    - "sagemaker:CreateProcessingJob"
+    - "sagemaker:CreateTrainingJob"
+  condition:
+    - test: "Bool"
+      variable: "sagemaker:InterContainerTrafficEncryption"
+      values:
+        - false
+  resources:
+    - "*"
+
+- sid: "DenyeSagemakerWithoutVpcDomain"
+  effect: "Deny"
+  actions:
+    - "sagemaker:CreateDomain"
+  condition:
+    - test: "StringEquals"
+      variable: "sagemaker:AppNetworkAccessType"
+      values:
+        - "PublicInternetOnly"
+  resources:
+    - "*"

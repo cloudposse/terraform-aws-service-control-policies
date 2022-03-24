@@ -1,0 +1,12 @@
+- sid: "DenyConfigRulesDelete"
+  effect: "Deny"
+  actions:
+    - "config:DeleteConfigRule"
+    - "config:DeleteConfigurationRecorder"
+    - "config:DeleteDeliveryChannel"
+    - "config:StopConfigurationRecorder"
+    - "config:DeleteRetentionConfiguration"
+    - "config:DeleteEvaluationResults"
+    - "config:DeleteConfigurationAggregator"
+  resources:
+    - "*"

@@ -1,8 +1,20 @@
-- sid: "DenyDeletingCloudWatchLogs"
+- sid: "DenyCloudWatchDeletingLogs"
   effect: "Deny"
   actions:
     - "ec2:DeleteFlowLogs"
     - "logs:DeleteLogGroup"
     - "logs:DeleteLogStream"
+  resources:
+    - "*"
+
+- sid: "DenyDisablingCloudWatch"
+  effect: "Deny"
+  actions:
+    - "cloudwatch:DeleteAlarms"
+    - "cloudwatch:DeleteDashboards"
+    - "cloudwatch:DisableAlarmActions"
+    - "cloudwatch:PutDashboard"
+    - "cloudwatch:PutMetricAlarm"
+    - "cloudwatch:SetAlarmState"
   resources:
     - "*"

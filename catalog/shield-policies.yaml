@@ -1,0 +1,10 @@
+- sid: "DenyShieldlRemoval"
+  effect: "Deny"
+  actions:
+    - "shield:DeleteProtection"
+    - "shield:DeleteSubscription"
+    - "shield:DisassociateDRTLogBucket"
+    - "shield:DisassociateDRTRole"
+    - "shield:UpdateEmergencyContactSettings"
+  resources:
+    - "*"

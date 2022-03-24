@@ -1,4 +1,4 @@
-- sid: "ProtectS3Buckets"
+- sid: "DenyS3DeleteBucketsAndObjects"
   effect: "Deny"
   actions:
     - "s3:DeleteBucket"
@@ -6,7 +6,6 @@
     - "s3:DeleteObjectVersion"
   resources:
     - "*"
-
 
 - sid: "DenyS3BucketsPublicAccess"
   effect: "Deny"
@@ -16,29 +15,46 @@
   resources:
     - "*"
 
-
 - sid: "DenyS3IncorrectEncryptionHeader"
   effect: "Deny"
   actions:
     - "s3:PutObject"
-  resources:
-    - "*"
   condition:
     - test: "StringNotEquals"
       variable: "s3:x-amz-server-side-encryption"
       values:
         - "AES256"
         - "aws:kms"
-
+  resources:
+    - "*"
 
 - sid: "DenyS3UnEncryptedObjectUploads"
   effect: "Deny"
   actions:
     - "s3:PutObject"
-  resources:
-    - "*"
   condition:
-    - test: "Null"
+    - test: "Bool"
       variable: "s3:x-amz-server-side-encryption"
       values:
         - true
+  resources:
+    - "*"
+
+- sid: "DenyS3InNonSelectedRegion"
+  effect: "Deny"
+  actions:
+    - "s3:CreateBucket"
+  condition:
+    - test: "StringNotLike"
+      variable: "s3locationconstraint"
+      # The regions that the creation of buckets will be Denied
+      values:
+      %{ for r in split(",", s3_regions_lockdown) }
+        - ${trimspace(r)}
+      %{ endfor }
+    - test: "Bool"
+      variable: "s3locationconstraint"
+      values:
+        - false
+  resources:
+    - "arn:aws:s3:::*"
