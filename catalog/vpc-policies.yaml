@@ -15,7 +15,5 @@
     - "ec2:CreateEgressOnlyInternetGateway"
     - "ec2:CreateVpcPeeringConnection"
     - "ec2:AcceptVpcPeeringConnection"
-    - "globalaccelerator:Create*"
-    - "globalaccelerator:Update*"
   resources:
     - "*"

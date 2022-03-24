@@ -33,7 +33,7 @@
   actions:
     - "s3:PutObject"
   condition:
-    - test: "Null"
+    - test: "Bool"
       variable: "s3:x-amz-server-side-encryption"
       values:
         - true
@@ -52,7 +52,7 @@
       %{ for r in split(",", s3_regions_lockdown) }
         - ${trimspace(r)}
       %{ endfor }
-    - test: "Null"
+    - test: "Bool"
       variable: "s3locationconstraint"
       values:
         - false
