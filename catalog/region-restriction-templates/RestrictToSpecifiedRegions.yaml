@@ -1,5 +1,8 @@
+# Requires parameter:
+#  - allowed_regions # Comma separated list of regions in which to allow operations
+
 # https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_examples.html#examples_general
-- sid: "DenyRegionUsage"
+- sid: "RestrictToSpecifiedRegions"
   effect: "Deny"
   not_actions:
     - "a4b:*"
@@ -46,7 +49,7 @@
       variable: "aws:RequestedRegion"
       # List of allowed regions
       values:
-      %{ for r in split(",", regions_lockdown) }
+      %{ for r in split(",", allowed_regions) }
         - ${trimspace(r)}
       %{ endfor }
   resources:

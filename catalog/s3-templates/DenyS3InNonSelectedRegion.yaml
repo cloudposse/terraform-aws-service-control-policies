@@ -1,0 +1,21 @@
+# Requires parameter:
+#  - s3_regions_lockdown # Comma separated list of regions or region patterns in which to allow S3 bucket creation
+#
+# NOTE: "us-east-1" is the default region and cannot be specified explicitly.
+#       Therefore, this policy always excludes "us-east-1" from the list of allowed regions,
+#       because for us-east-1, s3:LocationConstraint is empty.
+
+- sid: "DenyS3InNonSelectedRegion"
+  effect: "Deny"
+  actions:
+    - "s3:CreateBucket"
+  condition:
+    - test: "StringNotLike"
+      variable: "s3:LocationConstraint"
+      # The regions where the creation of buckets will be allowed
+      values:
+      %{ for r in split(",", s3_regions_lockdown) }
+        - ${trimspace(r)}
+      %{ endfor }
+  resources:
+    - "arn:aws:s3:::*"
