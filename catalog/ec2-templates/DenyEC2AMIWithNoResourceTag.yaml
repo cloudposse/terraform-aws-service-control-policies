@@ -1,0 +1,16 @@
+# Requires parameters:
+#  - ami_tag_key
+#  - ami_tag_value
+
+- sid: "DenyEC2AMIWithNoResourceTag"
+  effect: "Deny"
+  actions:
+  - "ec2:RunInstances"
+  condition:
+  - test: "StringNotEqualsIgnoreCase"
+    variable: "ec2:ResourceTag/${ami_tag_key}"
+    values:
+    - "${ami_tag_value}"
+  resources:
+  - "arn:aws:ec2:*::image/ami-*"
+

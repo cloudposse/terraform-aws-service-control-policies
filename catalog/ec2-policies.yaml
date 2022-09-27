@@ -368,18 +368,6 @@
   resources:
     - "arn:aws:ec2:*:*:network-interface/*"
 
-- sid: "DenyEC2AMIWithNoResourceTag"
-  effect: "Deny"
-  actions:
-    - "ec2:RunInstances"
-  condition:
-    - test: "StringNotEqualsIgnoreCase"
-      variable: "ec2:ResourceTag/${ami_tag_key}"
-      values:
-        - "${ami_tag_value}"
-  resources:
-    - "arn:aws:ec2:*::image/ami-*"
-
 - sid: "DenyEC2WithNoIMDSv2"
   effect: "Deny"
   actions:
@@ -405,15 +393,3 @@
         - false
   resources:
     - "*"
-
-- sid: "DenyEC2AMINotCreatedBy"
-  effect: "Deny"
-  actions:
-    - "ec2:RunInstances"
-  condition:
-    - test: "StringNotEquals"
-      variable: "ec2:Owner"
-      values:
-        - "${ami_creator_account}"
-  resources:
-    - "arn:aws:ec2:*::image/ami-*"

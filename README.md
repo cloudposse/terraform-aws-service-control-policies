@@ -69,6 +69,9 @@ We maintain a comprehensive [catalog](catalog) of SCP configurations and welcome
 
 The [example](examples/complete) in this module uses the catalog to provision the SCPs on AWS.
 
+The policies in the `catalog/*-templates` files require parameters supplied via the `parameters` input
+to [terraform-yaml-config](https://github.com/cloudposse/terraform-yaml-config).
+
 
 ## Security & Compliance [<img src="https://cloudposse.com/wp-content/uploads/2020/11/bridgecrew.svg" width="250" align="right" />](https://bridgecrew.io/)
 
@@ -121,12 +124,27 @@ For automated tests of the complete example using [bats](https://github.com/bats
     context = module.this.context
   }
 
+  module "yaml_config_with_parameters" {
+    source = "cloudposse/config/yaml"
+    # Cloud Posse recommends pinning every module to a specific version
+    # version     = "x.x.x"
+
+    list_config_local_base_path = path.module
+    list_config_paths           = ["https://raw.githubusercontent.com/cloudposse/terraform-aws-service-control-policies/0.12.0/catalog/s3-templates/DenyS3InNonSelectedRegion.yaml"]
+
+    parameters = {
+      "s3_regions_lockdown" = "us-*,eu-north-1"
+      }
+
+    context = module.this.context
+  }
+
   data "aws_caller_identity" "this" {}
 
   module "service_control_policies" {
     source = "../../"
 
-    service_control_policy_statements  = module.yaml_config.list_configs
+    service_control_policy_statements  = concat(module.yaml_config.list_configs, module.yaml_config_with_parameters.list_configs)
     service_control_policy_description = var.service_control_policy_description
     target_id                          = data.aws_caller_identity.this.account_id
 
