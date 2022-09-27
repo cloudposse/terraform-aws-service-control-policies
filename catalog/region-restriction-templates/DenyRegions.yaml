@@ -47,7 +47,7 @@
   condition:
     - test: "StringEqualsIgnoreCase"
       variable: "aws:RequestedRegion"
-      # List of allowed regions
+      # List of denied regions
       values:
       %{ for r in split(",", denied_regions) }
         - ${trimspace(r)}
