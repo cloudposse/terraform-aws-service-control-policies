@@ -11,6 +11,7 @@ locals {
     }
   )
 }
+    
 
 data "aws_iam_policy_document" "this" {
   for_each = local.service_control_policy_statements_map
