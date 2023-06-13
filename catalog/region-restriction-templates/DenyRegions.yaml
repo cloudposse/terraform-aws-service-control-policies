@@ -6,6 +6,7 @@
   effect: "Deny"
   not_actions:
     - "a4b:*"
+    - "account:*"
     - "acm:*"
     - "aws-marketplace-management:*"
     - "aws-marketplace:*"
@@ -37,6 +38,7 @@
     - "s3:ListAllMyBuckets"
     - "s3:PutAccountPublic*"
     - "shield:*"
+    - "sso:*"
     - "sts:*"
     - "support:*"
     - "trustedadvisor:*"
