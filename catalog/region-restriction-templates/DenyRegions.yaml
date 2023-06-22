@@ -6,6 +6,7 @@
   effect: "Deny"
   not_actions:
     - "a4b:*"
+    - "access-analyzer:*"
     - "account:*"
     - "acm:*"
     - "aws-marketplace-management:*"
