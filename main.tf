@@ -44,6 +44,6 @@ resource "aws_organizations_policy" "this" {
 
 resource "aws_organizations_policy_attachment" "this" {
   count     = module.this.enabled && length(var.service_control_policy_statements) > 0 ? 1 : 0
-  policy_id = join("", aws_organizations_policy.this.*.id)
+  policy_id = join("", aws_organizations_policy.this[*].id)
   target_id = var.target_id
 }
