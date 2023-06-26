@@ -1,10 +1,13 @@
 #
 # This policy denies instance types that aren't based on the Nitro system as documented in the following document:
 # https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
-# aws ec2 describe-instance-types \
-#    --filters Name=hypervisor,Values=nitro \
-#    --query "InstanceTypes[*].[InstanceType]" --output text | sort
-# List of Nitro-enabled instances updated 2023-06-23
+# The listing below *are* Nitro-based instances. Most are collected from the following CLI query:
+#     aws ec2 describe-instance-types \
+#        --filters Name=hypervisor,Values=nitro \
+#        --query "InstanceTypes[*].[InstanceType]" --output text | sort
+# Metal instances excluded from the query results, but explicitly listed in the AWS documentation
+# link above, manually added at the bottom of this list.
+# List of Nitro-enabled instances updated 2023-06-26
 #
 - sid: "DenyEC2NonNitroInstances"
   effect: "Deny"
@@ -28,7 +31,7 @@
         - c5.large
         - c5.xlarge
         - c5a.12xlarge
-        - c5a.16xlarge
+        - c5a.16xlarge q
         - c5a.24xlarge
         - c5a.2xlarge
         - c5a.4xlarge
@@ -527,6 +530,60 @@
         - z1d.6xlarge
         - z1d.large
         - z1d.xlarge
+        - a1.metal
+        - c5.metal
+        - c5d.metal
+        - c5n.metal
+        - c6a.metal
+        - c6g.metal
+        - c6gd.metal
+        - c6i.metal
+        - c6id.metal
+        - c6in.metal
+        - c7g.metal
+        - g4dn.metal
+        - g5g.metal
+        - i3.metal
+        - i3en.metal
+        - i4i.metal
+        - m5.metal
+        - m5d.metal
+        - m5dn.metal
+        - m5n.metal
+        - m5zn.metal
+        - m6a.metal
+        - m6g.metal
+        - m6gd.metal
+        - m6i.metal
+        - m6id.metal
+        - m6idn.metal
+        - m6in.metal
+        - m7g.metal
+        - mac1.metal
+        - mac2.metal
+        - r5.metal
+        - r5b.metal
+        - r5d.metal
+        - r5dn.metal
+        - r5n.metal
+        - r6a.metal
+        - r6g.metal
+        - r6gd.metal
+        - r6i.metal
+        - r6id.metal
+        - r6idn.metal
+        - r6in.metal
+        - r7g.metal
+        - u-12tb1.metal
+        - u-18tb1.metal
+        - u-24tb1.metal
+        - u-6tb1.metal
+        - u-9tb1.metal
+        - x2gd.metal
+        - x2idn.metal
+        - x2iedn.metal
+        - x2iezn.metal
+        - z1d.metal
 
 
   resources:
