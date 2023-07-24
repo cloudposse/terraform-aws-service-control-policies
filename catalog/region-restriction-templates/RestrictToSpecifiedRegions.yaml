@@ -12,7 +12,6 @@
     - "aws-marketplace-management:*"
     - "aws-marketplace:*"
     - "aws-portal:*"
-    - "awsbillingconsole:*"
     - "budgets:*"
     - "ce:*"
     - "chime:*"
@@ -35,9 +34,7 @@
     - "pricing:*"
     - "route53:*"
     - "route53domains:*"
-    - "s3:GetAccountPublic*"
-    - "s3:ListAllMyBuckets"
-    - "s3:PutAccountPublic*"
+    - "s3:*"
     - "shield:*"
     - "sso:*"
     - "sts:*"
@@ -47,6 +44,21 @@
     - "waf:*"
     - "wafv2:*"
     - "wellarchitected:*"
+  condition:
+    - test: "StringNotEqualsIgnoreCase"
+      variable: "aws:RequestedRegion"
+      # List of allowed regions
+      values:
+      %{ for r in split(",", allowed_regions) }
+        - ${trimspace(r)}
+      %{ endfor }
+  resources:
+    - "*"
+
+- sid: "RestrictCreateS3BucketToSpecifiedRegions"
+  effect: "Deny"
+  actions:
+    - "s3:CreateBucket"
   condition:
     - test: "StringNotEqualsIgnoreCase"
       variable: "aws:RequestedRegion"
