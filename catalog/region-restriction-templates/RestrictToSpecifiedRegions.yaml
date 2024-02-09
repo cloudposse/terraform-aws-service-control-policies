@@ -29,6 +29,7 @@
     - "iam:*"
     - "importexport:*"
     - "kms:*"
+    - "lambda:*"
     - "mobileanalytics:*"
     - "networkmanager:*"
     - "organizations:*"
@@ -69,5 +70,21 @@
       %{ for r in split(",", allowed_regions) }
         - ${trimspace(r)}
       %{ endfor }
+  resources:
+    - "*"
+
+- sid: "RestrictCreateLambdaToSpecifiedRegions"
+  effect: "Deny"
+  actions:
+    - "lambda:*"
+  condition:
+    - test: "StringNotEqualsIgnoreCase"
+      variable: "aws:RequestedRegion"
+      # List of allowed regions
+      values:
+      %{ for r in split(",", allowed_regions) }
+        - ${trimspace(r)}
+      %{ endfor }
+        - "us-east-1"
   resources:
     - "*"
