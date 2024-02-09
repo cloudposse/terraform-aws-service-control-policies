@@ -85,6 +85,7 @@
       %{ for r in split(",", allowed_regions) }
         - ${trimspace(r)}
       %{ endfor }
+        # this is hardcoded as us-east-1 is a requirement of lambda@edge
         - "us-east-1"
   resources:
     - "*"
