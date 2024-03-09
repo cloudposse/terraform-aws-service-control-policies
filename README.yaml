@@ -23,15 +23,6 @@ github_repo: cloudposse/terraform-aws-service-control-policies
 
 # Badges to display
 badges:
-  - name: Last Updated
-    image: https://img.shields.io/github/last-commit/cloudposse/terraform-aws-service-control-policies.svg?style=for-the-badge
-    url: https://github.com/cloudposse/terraform-aws-service-control-policies/commits
-  - name: Last Updated
-    image: https://img.shields.io/github/last-commit/cloudposse/terraform-aws-service-control-policies.svg?style=for-the-badge
-    url: https://github.com/cloudposse/terraform-aws-service-control-policies/commits
-  - name: Last Updated
-    image: https://img.shields.io/github/last-commit/cloudposse/terraform-aws-service-control-policies.svg?style=for-the-badge
-    url: https://github.com/cloudposse/terraform-aws-service-control-policies/commits
   - name: Latest Release
     image: https://img.shields.io/github/release/cloudposse/terraform-aws-service-control-policies.svg?style=for-the-badge
     url: https://github.com/cloudposse/terraform-aws-service-control-policies/releases/latest
@@ -54,6 +45,8 @@ categories:
   - iam
   - iam-role
   - account
+
+# List any related terraform modules that this module may be used with or that this module depends on.
 
 # List any related terraform modules that this module may be used with or that this module depends on.
 
