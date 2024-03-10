@@ -57,6 +57,8 @@ categories:
 # List any related terraform modules that this module may be used with or that this module depends on.
 
 # List any related terraform modules that this module may be used with or that this module depends on.
+
+# List any related terraform modules that this module may be used with or that this module depends on.
 related:
   - name: "terraform-aws-iam-role"
     description: "A Terraform module that creates IAM role with provided JSON IAM polices documents."
