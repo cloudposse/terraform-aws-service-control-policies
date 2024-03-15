@@ -6,11 +6,13 @@
   effect: "Deny"
   not_actions:
     - "a4b:*"
+    - "access-analyzer:*"
+    - "account:*"
     - "acm:*"
+    - "artifact:*"
     - "aws-marketplace-management:*"
     - "aws-marketplace:*"
     - "aws-portal:*"
-    - "awsbillingconsole:*"
     - "budgets:*"
     - "ce:*"
     - "chime:*"
@@ -27,16 +29,17 @@
     - "iam:*"
     - "importexport:*"
     - "kms:*"
+    - "lambda:*"
     - "mobileanalytics:*"
     - "networkmanager:*"
     - "organizations:*"
     - "pricing:*"
     - "route53:*"
     - "route53domains:*"
-    - "s3:GetAccountPublic*"
-    - "s3:ListAllMyBuckets"
-    - "s3:PutAccountPublic*"
+    - "s3:*"
     - "shield:*"
+    - "ssm:*"
+    - "sso:*"
     - "sts:*"
     - "support:*"
     - "trustedadvisor:*"
@@ -52,5 +55,37 @@
       %{ for r in split(",", allowed_regions) }
         - ${trimspace(r)}
       %{ endfor }
+  resources:
+    - "*"
+
+- sid: "RestrictCreateS3BucketToSpecifiedRegions"
+  effect: "Deny"
+  actions:
+    - "s3:CreateBucket"
+  condition:
+    - test: "StringNotEqualsIgnoreCase"
+      variable: "aws:RequestedRegion"
+      # List of allowed regions
+      values:
+      %{ for r in split(",", allowed_regions) }
+        - ${trimspace(r)}
+      %{ endfor }
+  resources:
+    - "*"
+
+- sid: "RestrictCreateLambdaToSpecifiedRegions"
+  effect: "Deny"
+  actions:
+    - "lambda:*"
+  condition:
+    - test: "StringNotEqualsIgnoreCase"
+      variable: "aws:RequestedRegion"
+      # List of allowed regions
+      values:
+      %{ for r in split(",", allowed_regions) }
+        - ${trimspace(r)}
+      %{ endfor }
+        # this is hardcoded as us-east-1 is a requirement of lambda@edge
+        - "us-east-1"
   resources:
     - "*"
