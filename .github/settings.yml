@@ -1,0 +1,7 @@
+# Upstream changes from _extends are only recognized when modifications are made to this file in the default branch.
+_extends: .github
+repository:
+  name: terraform-aws-service-control-policies
+  description: Terraform module to provision Service Control Policies (SCP) for AWS Organizations, Organizational Units, and AWS accounts
+  homepage: https://cloudposse.com/accelerate
+  topics: scp, service-control-policies, service-control-policy, iam, organization, organizational-units, compliance, terraform, terraform-modules
