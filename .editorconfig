@@ -7,19 +7,23 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{tf,tfvars}]
-indent_size = 2
-indent_style = space
-
-[*.md]
-max_line_length = 0
-trim_trailing_whitespace = false
-
 # Override for Makefile
 [{Makefile, makefile, GNUmakefile, Makefile.*}]
-tab_width = 2
+tab_width = 4
 indent_style = tab
-indent_size = 4
+indent_size = tab
+
+[*.sh]
+indent_size = unset
+indent_style = tab
+
+# Enforce `go` formatting rules
+[*.go]
+indent_size = unset
+indent_style = tab
+
+[*.json]
+insert_final_newline = false
 
 [COMMIT_EDITMSG]
 max_line_length = 0
