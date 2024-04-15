@@ -11,7 +11,6 @@
   effect: "Deny"
   actions:
     - "s3:PutBucketPublicAccessBlock"
-    - "s3:DeletePublicAccessBlock"
   resources:
     - "*"
 

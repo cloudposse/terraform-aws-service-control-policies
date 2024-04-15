@@ -5,7 +5,7 @@
     - "rds:CreateDBInstance"
     - "rds:RestoreDBClusterFromS3"
     - "rds:RestoreDBInstanceFromS3"
-    - "rds:RestoreDBClusterFromDBSnapshot"
+    - "rds:RestoreDBClusterFromSnapshot"
     - "rds:RestoreDBClusterToPointInTime"
   condition:
     - test: "Bool"
