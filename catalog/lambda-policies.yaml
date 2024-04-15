@@ -4,9 +4,9 @@
     - "lambda:CreateFunction"
     - "lambda:UpdateFunctionConfiguration"
   condition:
-    - test: "Bool"
+    - test: "Null"
       variable: "lambda:VpcIds"
       values:
-        - false
+        - true
   resources:
     - "*"

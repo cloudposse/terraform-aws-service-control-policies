@@ -6,11 +6,12 @@
   effect: "Deny"
   not_actions:
     - "a4b:*"
+    - "account:*"
     - "acm:*"
+    - "artifact:*"
     - "aws-marketplace-management:*"
     - "aws-marketplace:*"
     - "aws-portal:*"
-    - "awsbillingconsole:*"
     - "budgets:*"
     - "ce:*"
     - "chime:*"
