@@ -1,5 +1,5 @@
 locals {
-  service_control_policy_statements_map = { for i in var.service_control_policy_statements : i.sid => i }
+  service_control_policy_statements_map = { for i in var.service_control_policy_statements : i.sid => i if module.this.enabled }
 
   statements = flatten([for i in data.aws_iam_policy_document.this : jsondecode(i.json).Statement])
   version    = try(jsondecode(values(data.aws_iam_policy_document.this)[0].json).Version, null)
@@ -13,7 +13,7 @@ locals {
 }
 
 data "aws_iam_policy_document" "this" {
-  for_each = module.this.enabled ? local.service_control_policy_statements_map : {}
+  for_each = local.service_control_policy_statements_map
 
   statement {
     sid         = each.value.sid
@@ -35,7 +35,7 @@ data "aws_iam_policy_document" "this" {
 }
 
 resource "aws_organizations_policy" "this" {
-  for_each    = module.this.enabled ? local.service_control_policy_statements_map : {}
+  for_each    = local.service_control_policy_statements_map
   name        = join("-", [module.this.id, each.key])
   description = var.service_control_policy_description
   content = jsonencode(
@@ -48,7 +48,7 @@ resource "aws_organizations_policy" "this" {
 }
 
 resource "aws_organizations_policy_attachment" "this" {
-  for_each  = module.this.enabled ? local.service_control_policy_statements_map : {}
+  for_each  = local.service_control_policy_statements_map
   policy_id = join("", aws_organizations_policy.this[each.key].id)
   target_id = var.target_id
 }
