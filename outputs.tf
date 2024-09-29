@@ -1,6 +1,6 @@
 locals {
-  ids  = [for k, v in aws_organizations_policy.this : v.id]
-  arns = [for k, v in aws_organizations_policy.this : v.arn]
+  ids  = set([for k, v in aws_organizations_policy.this : v.id])
+  arns = set([for k, v in aws_organizations_policy.this : v.arn])
 }
 
 output "organizations_policy_id" {
