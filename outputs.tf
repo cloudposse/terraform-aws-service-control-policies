@@ -1,19 +1,19 @@
 output "organizations_policy_id" {
-  value       = one(aws_organizations_policy.this.*.id)
+  value       = one([ for i in aws_organizations_policy.this : i.id])
   description = "The unique identifier of the policy"
 }
 
 output "organizations_policy_arn" {
-  value       = one(aws_organizations_policy.this.*.arn)
+  value       = one([ for i in aws_organizations_policy.this : i.arn])
   description = "Amazon Resource Name (ARN) of the policy"
 }
 
 output "organizations_policy_ids" {
-  value       = aws_organizations_policy.this.*.id
+  value       = [ for i in aws_organizations_policy.this : i.id]
   description = "The unique identifier of the policies"
 }
 
 output "organizations_policy_arns" {
-  value       = aws_organizations_policy.this.*.arn
+  value       = [ for i in aws_organizations_policy.this : i.arn]
   description = "Amazon Resource Name (ARN) of the policies"
 }
