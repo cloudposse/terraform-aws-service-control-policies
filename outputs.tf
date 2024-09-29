@@ -1,19 +1,24 @@
+locals {
+  ids  = [for k, v in aws_organizations_policy.this : v.id]
+  arns = [for k, v in aws_organizations_policy.this : v.arn]
+}
+
 output "organizations_policy_id" {
-  value       = one([for k, v in aws_organizations_policy.this : v.id])
+  value       = one(local.ids)
   description = "The unique identifier of the policy"
 }
 
 output "organizations_policy_arn" {
-  value       = one([for k, v in aws_organizations_policy.this : v.arn])
+  value       = one(local.arns)
   description = "Amazon Resource Name (ARN) of the policy"
 }
 
 output "organizations_policy_ids" {
-  value       = [for k, v in aws_organizations_policy.this : v.id]
+  value       = local.ids
   description = "The unique identifier of the policies"
 }
 
 output "organizations_policy_arns" {
-  value       = [for k, v in aws_organizations_policy.this : v.arn]
+  value       = local.arns
   description = "Amazon Resource Name (ARN) of the policies"
 }
