@@ -49,6 +49,6 @@ resource "aws_organizations_policy" "this" {
 
 resource "aws_organizations_policy_attachment" "this" {
   for_each  = local.service_control_policy_statements_map
-  policy_id = join("", aws_organizations_policy.this[each.key].id)
+  policy_id = aws_organizations_policy.this[each.key].id
   target_id = var.target_id
 }
