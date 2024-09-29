@@ -38,13 +38,13 @@ resource "aws_organizations_policy" "this" {
   for_each    = module.this.enabled ? local.service_control_policy_statements_map : {}
   name        = join(module.this.id, "-", each.key)
   description = var.service_control_policy_description
-  content     = jsonencode(
+  content = jsonencode(
     {
       Version   = try(jsondecode(data.aws_iam_policy_document.this[each.key].json).Version, null)
       Statement = jsondecode(data.aws_iam_policy_document.this[each.key].json).Statement
     }
   )
-  tags        = module.this.tags
+  tags = module.this.tags
 }
 
 resource "aws_organizations_policy_attachment" "this" {
