@@ -16,11 +16,6 @@ list_config_paths = [
   "../../catalog/cloudwatch-logs-policies.yaml",
   "../../catalog/config-policies.yaml",
   "../../catalog/deny-all-policies.yaml",
-  "../../catalog/ec2-policies.yaml",
-  "../../catalog/guardduty-policies.yaml",
-  "../../catalog/iam-policies.yaml",
-  "../../catalog/kms-policies.yaml",
-  "../../catalog/lambda-policies.yaml"
 ]
 
 parameters = {
