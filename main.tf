@@ -36,7 +36,7 @@ data "aws_iam_policy_document" "this" {
 
 resource "aws_organizations_policy" "this" {
   for_each    = module.this.enabled ? local.service_control_policy_statements_map : {}
-  name        = join(module.this.id, "-", each.key)
+  name        = join("-", [module.this.id, each.key])
   description = var.service_control_policy_description
   content = jsonencode(
     {
