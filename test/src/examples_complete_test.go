@@ -73,7 +73,7 @@ func TestExamplesComplete(t *testing.T) {
 
 	e = filepath.Walk(path.Join(path.Dir(rootFolder), "./catalog"), func(path string, info os.FileInfo, err error) error {
 		if err == nil && catalogRegEx.MatchString(info.Name()) {
-			applyPolicies(t, tempTestFolder, info.Name())
+			applyPolicies(t, tempTestFolder, path)
 		}
 		return nil
 	})
