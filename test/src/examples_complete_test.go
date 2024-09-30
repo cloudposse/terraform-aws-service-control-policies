@@ -17,7 +17,6 @@ import (
 
 func cleanup(t *testing.T, terraformOptions *terraform.Options, tempTestFolder string) {
 	terraform.Destroy(t, terraformOptions)
-	os.RemoveAll(tempTestFolder)
 }
 
 func applyPolicies(t *testing.T, tempTestFolder string, policyFile string) {
@@ -65,6 +64,7 @@ func TestExamplesComplete(t *testing.T) {
 	terraformFolderRelativeToRoot := "examples/complete"
 
 	tempTestFolder := test_structure.CopyTerraformFolderToTemp(t, rootFolder, terraformFolderRelativeToRoot)
+	defer os.RemoveAll(tempTestFolder)
 
 	catalogRegEx, e := regexp.Compile("^.+\\.(yaml)$")
 	if e != nil {
