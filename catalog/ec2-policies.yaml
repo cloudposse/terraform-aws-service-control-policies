@@ -294,3 +294,15 @@
         - false
   resources:
     - "*"
+
+- sid: "RequireEBSEncryption"
+  effect: "Deny"
+  actions:
+    - "ec2:CreateVolume"
+  condition:
+    - test: "Bool"
+      variable: "ec2:Encrypted"
+      values:
+        - false
+  resources:
+    - "*"
