@@ -27,8 +27,7 @@
     - "health:*"
     - "iam:*"
     - "importexport:*"
-    - "kms:*"    
-    - "lambda:*"    
+    - "kms:*"
     - "mobileanalytics:*"
     - "networkmanager:*"
     - "organizations:*"
@@ -58,19 +57,16 @@
   resources:
     - "*"
 
-- sid: "RestrictLambdaToSpecifiedRegions"
-  effect: "Deny"
+- sid: "AllowLambdaUsEast1"
+  effect: "Allow"
   actions:
     - "lambda:*"
   condition:
-    - test: "StringNotEqualsIgnoreCase"
+    - test: "StringEqualsIgnoreCase"
       variable: "aws:RequestedRegion"
       # List of allowed regions
       values:
         # Us east-1 required for cloudfront lambda on edge
         - us-east-1
-      %{ for r in split(",", allowed_regions) }
-        - ${trimspace(r)}
-      %{ endfor }
   resources:
     - "*"
