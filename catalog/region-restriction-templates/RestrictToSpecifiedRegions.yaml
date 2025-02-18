@@ -28,6 +28,7 @@
     - "iam:*"
     - "importexport:*"
     - "kms:*"
+    - "lambda:*"
     - "mobileanalytics:*"
     - "networkmanager:*"
     - "organizations:*"
