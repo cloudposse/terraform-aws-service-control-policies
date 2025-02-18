@@ -27,7 +27,7 @@
     - "health:*"
     - "iam:*"
     - "importexport:*"
-    - "kms:*"
+    - "kms:*"    
     - "mobileanalytics:*"
     - "networkmanager:*"
     - "organizations:*"
@@ -58,11 +58,11 @@
     - "*"
 
 - sid: "RestrictLambdaToSpecifiedRegions"
-  effect: "Deny"
+  effect: "Allow"
   actions:
     - "lambda:*"
   condition:
-    - test: "StringNotEqualsIgnoreCase"
+    - test: "StringEqualsIgnoreCase"
       variable: "aws:RequestedRegion"
       # List of allowed regions
       values:
