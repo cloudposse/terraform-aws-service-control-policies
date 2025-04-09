@@ -28,6 +28,7 @@
     - "iam:*"
     - "importexport:*"
     - "kms:*"
+    - "lambda:*"
     - "mobileanalytics:*"
     - "networkmanager:*"
     - "organizations:*"
@@ -53,6 +54,23 @@
       values:
       %{ for r in split(",", denied_regions) }
         - ${trimspace(r)}
+      %{ endfor }
+  resources:
+    - "*"
+
+- sid: "DenyLambdaInRegions"
+  effect: "Deny"
+  actions:
+    - "lambda:*"
+  condition:
+    - test: "StringEqualsIgnoreCase"
+      variable: "aws:RequestedRegion"
+      # List of denied regions
+      values:
+      %{ for r in split(",", denied_regions) }
+        %{ if ! try(tobool(cloudfront_lambda_edge_enabled), false) || trimspace(r) != "us-east-1") }
+        - ${trimspace(r)}
+        %{ endif }
       %{ endfor }
   resources:
     - "*"
