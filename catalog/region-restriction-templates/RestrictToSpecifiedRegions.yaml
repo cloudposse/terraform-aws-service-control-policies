@@ -68,7 +68,7 @@
       # List of allowed regions
       values:
         # Us east-1 required for cloudfront lambda on edge
-      %{ if try(tobool(cloudfront_lambda_edge_enabled), false) && !contains(allowed_regions, "us-east-1") }
+      %{ if try(tobool(cloudfront_lambda_edge_enabled), false) && !contains(split(",", allowed_regions), "us-east-1") }
         - us-east-1
       %{ endif }
       %{ for r in split(",", allowed_regions) }
