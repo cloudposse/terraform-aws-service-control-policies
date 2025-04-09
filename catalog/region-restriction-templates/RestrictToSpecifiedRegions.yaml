@@ -1,5 +1,25 @@
 # Requires parameter:
 #  - allowed_regions # Comma separated list of regions in which to allow operations
+#  - cloudfront_lambda_edge_enabled # Boolean flag that enables lambda in us-east-1 region required by cloudfront lambda on edge
+
+- sid: "RestrictLambdaToSpecifiedRegions"
+  effect: "Deny"
+  actions:
+    - "lambda:*"
+  condition:
+    - test: "StringNotEqualsIgnoreCase"
+      variable: "aws:RequestedRegion"
+      # List of allowed regions
+      values:
+        # Us east-1 required for cloudfront lambda on edge
+      %{ if cloudfront_lambda_edge_enabled == "true" && !contains(split(",", allowed_regions), "us-east-1") }
+        - us-east-1
+      %{ endif }
+      %{ for r in split(",", allowed_regions) }
+        - ${trimspace(r)}
+      %{ endfor }
+  resources:
+    - "*"
 
 # https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_examples.html#examples_general
 - sid: "RestrictToSpecifiedRegions"
@@ -52,25 +72,6 @@
       variable: "aws:RequestedRegion"
       # List of allowed regions
       values:
-      %{ for r in split(",", allowed_regions) }
-        - ${trimspace(r)}
-      %{ endfor }
-  resources:
-    - "*"
-
-- sid: "RestrictLambdaToSpecifiedRegions"
-  effect: "Deny"
-  actions:
-    - "lambda:*"
-  condition:
-    - test: "StringNotEqualsIgnoreCase"
-      variable: "aws:RequestedRegion"
-      # List of allowed regions
-      values:
-        # Us east-1 required for cloudfront lambda on edge
-      %{ if cloudfront_lambda_edge_enabled == "true" && !contains(split(",", allowed_regions), "us-east-1") }
-        - us-east-1
-      %{ endif }
       %{ for r in split(",", allowed_regions) }
         - ${trimspace(r)}
       %{ endfor }
