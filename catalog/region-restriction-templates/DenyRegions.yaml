@@ -40,6 +40,9 @@
     - "s3:GetAccountPublic*"
     - "s3:ListAllMyBuckets"
     - "s3:PutAccountPublic*"
+    %{ if servicequotas_enabled == "true" }
+    - "servicequotas:*"
+    %{ endif }
     - "shield:*"
     - "sts:*"
     - "support:*"
