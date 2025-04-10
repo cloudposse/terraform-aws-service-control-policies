@@ -28,7 +28,9 @@
     - "iam:*"
     - "importexport:*"
     - "kms:*"
+    %{ if cloudfront_lambda_edge_enabled == "true" }
     - "lambda:*"
+    %{ endif }
     - "mobileanalytics:*"
     - "networkmanager:*"
     - "organizations:*"
