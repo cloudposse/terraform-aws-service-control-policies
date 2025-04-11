@@ -18,4 +18,5 @@ parameters = {
   denied_regions                 = "sa-east-1"
   s3_regions_lockdown            = "eu-central-1, eu-west-1"
   cloudfront_lambda_edge_enabled = "false"
+  servicequotas_enabled          = "false"
 }
