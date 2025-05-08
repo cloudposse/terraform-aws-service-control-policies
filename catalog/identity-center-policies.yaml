@@ -1,0 +1,6 @@
+- sid: "DenyCreatingAccountIdcInstances"
+  effect: "Deny"
+  actions:
+    - "sso:CreateInstance"
+  resources:
+    - "*"
