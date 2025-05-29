@@ -28,6 +28,9 @@
     - "iam:*"
     - "importexport:*"
     - "kms:*"
+    %{ if cloudfront_lambda_edge_enabled == "true" }
+    - "lambda:*"
+    %{ endif }
     - "mobileanalytics:*"
     - "networkmanager:*"
     - "organizations:*"
@@ -37,6 +40,9 @@
     - "s3:GetAccountPublic*"
     - "s3:ListAllMyBuckets"
     - "s3:PutAccountPublic*"
+    %{ if servicequotas_enabled == "true" }
+    - "servicequotas:*"
+    %{ endif }
     - "shield:*"
     - "sts:*"
     - "support:*"
@@ -53,6 +59,23 @@
       values:
       %{ for r in split(",", denied_regions) }
         - ${trimspace(r)}
+      %{ endfor }
+  resources:
+    - "*"
+
+- sid: "DenyLambdaInRegions"
+  effect: "Deny"
+  actions:
+    - "lambda:*"
+  condition:
+    - test: "StringEqualsIgnoreCase"
+      variable: "aws:RequestedRegion"
+      # List of denied regions
+      values:
+      %{ for r in split(",", denied_regions) }
+        %{ if cloudfront_lambda_edge_enabled != "true" || trimspace(r) != "us-east-1" }
+        - ${trimspace(r)}
+        %{ endif }
       %{ endfor }
   resources:
     - "*"
