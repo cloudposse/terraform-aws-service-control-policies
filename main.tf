@@ -1,15 +1,5 @@
 locals {
   service_control_policy_statements_map = { for i in var.service_control_policy_statements : i.sid => i }
-
-  statements = flatten([for i in data.aws_iam_policy_document.this : jsondecode(i.json).Statement])
-  version    = try(jsondecode(values(data.aws_iam_policy_document.this)[0].json).Version, null)
-
-  service_control_policy_json = jsonencode(
-    {
-      Version   = local.version
-      Statement = local.statements
-    }
-  )
 }
 
 data "aws_iam_policy_document" "this" {
@@ -38,7 +28,7 @@ resource "aws_organizations_policy" "this" {
   count       = module.this.enabled && length(var.service_control_policy_statements) > 0 ? 1 : 0
   name        = module.this.id
   description = var.service_control_policy_description
-  content     = local.service_control_policy_json
+  content     = data.aws_iam_policy_document.this.minified_json
   tags        = module.this.tags
 }
 
