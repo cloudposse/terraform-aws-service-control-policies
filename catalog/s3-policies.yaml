@@ -10,7 +10,8 @@
 - sid: "DenyS3BucketsPublicAccess"
   effect: "Deny"
   actions:
-    - "s3:PutBucketPublicAccessBlock"
+    - "s3:Put*PublicAccessBlock"
+    - "s3:Delete*PublicAccessBlock"
   resources:
     - "*"
 
