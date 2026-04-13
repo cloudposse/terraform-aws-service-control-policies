@@ -40,7 +40,7 @@
     - test: "StringNotLike"
       variable: "ec2:InstanceType"
       values:
-        # updated 2025-02-14
+        # updated 2026-04-13 from us-east-1, us-east-2, us-west-2, eu-west-1
         - a1.*
         - c5.*
         - c5a.*
@@ -60,7 +60,14 @@
         - c7gn.*
         - c7i-flex.*
         - c7i.*
+        - c8a.*
         - c8g.*
+        - c8gb.*
+        - c8gd.*
+        - c8gn.*
+        - c8i.*
+        - c8i-flex.*
+        - c8id.*
         - d3.*
         - d3en.*
         - dl1.*
@@ -72,16 +79,22 @@
         - g5g.*
         - g6.*
         - g6e.*
+        - g6f.*
+        - g7e.*
         - gr6.*
+        - gr6f.*
         - hpc6a.*
         - hpc6id.*
         - hpc7a.*
         - hpc7g.*
+        - hpc8a.*
         - i3en.*
         - i4g.*
         - i4i.*
+        - i7i.*
         - i7ie.*
         - i8g.*
+        - i8ge.*
         - im4gn.*
         - inf1.*
         - inf2.*
@@ -105,12 +118,23 @@
         - m7gd.*
         - m7i-flex.*
         - m7i.*
+        - m8a.*
+        - m8azn.*
         - m8g.*
+        - m8gb.*
+        - m8gd.*
+        - m8gn.*
+        - m8i.*
+        - m8i-flex.*
+        - m8id.*
         - p3dn.*
         - p4d.*
+        - p4de.*
         - p5.*
         - p5e.*
         - p5en.*
+        - p6-b200.*
+        - p6-b300.*
         - r5.*
         - r5a.*
         - r5ad.*
@@ -130,7 +154,14 @@
         - r7gd.*
         - r7i.*
         - r7iz.*
+        - r8a.*
         - r8g.*
+        - r8gb.*
+        - r8gd.*
+        - r8gn.*
+        - r8i.*
+        - r8i-flex.*
+        - r8id.*
         - t3.*
         - t3a.*
         - t4g.*
@@ -154,7 +185,9 @@
         - x2idn.*
         - x2iedn.*
         - x2iezn.*
+        - x8aedz.*
         - x8g.*
+        - x8i.*
         - z1d.*
 
   resources:
@@ -190,7 +223,7 @@
     - test: "StringNotLike"
       variable: "ec2:InstanceType"
       values:
-        # updated 2025-02-14
+        # updated 2026-04-13 from us-east-1, us-east-2, us-west-2, eu-west-1
         - c5a.*
         - c5ad.*
         - c5n.*
@@ -205,7 +238,14 @@
         - c7gn.*
         - c7i-flex.*
         - c7i.*
+        - c8a.*
         - c8g.*
+        - c8gb.*
+        - c8gd.*
+        - c8gn.*
+        - c8i.*
+        - c8i-flex.*
+        - c8id.*
         - d3.*
         - d3en.*
         - dl1.*
@@ -216,16 +256,22 @@
         - g5.*
         - g6.*
         - g6e.*
+        - g6f.*
+        - g7e.*
         - gr6.*
+        - gr6f.*
         - hpc6a.*
         - hpc6id.*
         - hpc7a.*
         - hpc7g.*
+        - hpc8a.*
         - i3en.*
         - i4g.*
         - i4i.*
+        - i7i.*
         - i7ie.*
         - i8g.*
+        - i8ge.*
         - im4gn.*
         - inf1.*
         - inf2.*
@@ -243,12 +289,25 @@
         - m7gd.*
         - m7i-flex.*
         - m7i.*
+        - m8a.*
+        - m8azn.*
         - m8g.*
+        - m8gb.*
+        - m8gd.*
+        - m8gn.*
+        - m8i.*
+        - m8i-flex.*
+        - m8id.*
+        - mac-m4.*
+        - mac-m4pro.*
         - p3dn.*
         - p4d.*
+        - p4de.*
         - p5.*
         - p5e.*
         - p5en.*
+        - p6-b200.*
+        - p6-b300.*
         - r5dn.*
         - r5n.*
         - r6a.*
@@ -261,7 +320,14 @@
         - r7gd.*
         - r7i.*
         - r7iz.*
+        - r8a.*
         - r8g.*
+        - r8gb.*
+        - r8gd.*
+        - r8gn.*
+        - r8i.*
+        - r8i-flex.*
+        - r8id.*
         - trn1.*
         - trn1n.*
         - trn2.*
@@ -281,7 +347,9 @@
         - x2idn.*
         - x2iedn.*
         - x2iezn.*
+        - x8aedz.*
         - x8g.*
+        - x8i.*
 
   resources:
     - "arn:aws:ec2:*:*:instance/*"
