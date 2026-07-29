@@ -1,0 +1,27 @@
+# Amazon Bedrock service control policies.
+
+# Requires that foundation models be invoked through an inference profile rather
+# than directly by model ID, which is how cross-Region routing and the
+# associated Region guardrails are enforced. The `bedrock:InferenceProfileArn`
+# condition key is absent (Null) when a model is invoked directly.
+#
+# Speech-to-speech models (e.g. Amazon Nova Sonic) are exempted via
+# `not_resources` because they are only reachable through the bidirectional
+# streaming API, which references models directly by ID and does not support
+# inference profiles. That API authorizes as `bedrock:InvokeModel`, and Bedrock
+# exposes no condition key identifying the requested model, so excluding the
+# model ARN is the only way to express the exception.
+# https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithBidirectionalStream.html
+- sid: "DenyDirectFoundationModelAccessExceptBidirectionalStreamModels"
+  effect: "Deny"
+  actions:
+    - "bedrock:InvokeModel"
+    - "bedrock:InvokeModelWithResponseStream"
+  not_resources:
+    - "arn:aws:bedrock:us-east-1::foundation-model/amazon.nova-2-sonic-v1:0"
+    - "arn:aws:bedrock:us-west-2::foundation-model/amazon.nova-2-sonic-v1:0"
+  condition:
+    - test: "Null"
+      variable: "bedrock:InferenceProfileArn"
+      values:
+        - true

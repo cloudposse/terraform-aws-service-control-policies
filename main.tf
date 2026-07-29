@@ -16,11 +16,12 @@ data "aws_iam_policy_document" "this" {
   for_each = local.service_control_policy_statements_map
 
   statement {
-    sid         = each.value.sid
-    effect      = each.value.effect
-    actions     = try(each.value.actions, null)
-    not_actions = try(each.value.not_actions, null)
-    resources   = each.value.resources
+    sid           = each.value.sid
+    effect        = each.value.effect
+    actions       = try(each.value.actions, null)
+    not_actions   = try(each.value.not_actions, null)
+    resources     = try(each.value.resources, null)
+    not_resources = try(each.value.not_resources, null)
 
     dynamic "condition" {
       for_each = try(each.value.condition, null) != null ? each.value.condition : []
