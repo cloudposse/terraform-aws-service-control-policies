@@ -28,6 +28,9 @@
     - "iam:*"
     - "importexport:*"
     - "kms:*"
+    %{ if cloudfront_lambda_edge_enabled == "true" }
+    - "lambda:*"
+    %{ endif }
     - "mobileanalytics:*"
     - "networkmanager:*"
     - "organizations:*"
@@ -37,6 +40,9 @@
     - "s3:GetAccountPublic*"
     - "s3:ListAllMyBuckets"
     - "s3:PutAccountPublic*"
+    %{ if servicequotas_enabled == "true" }
+    - "servicequotas:*"
+    %{ endif }
     - "shield:*"
     - "sts:*"
     - "support:*"
@@ -51,6 +57,25 @@
       variable: "aws:RequestedRegion"
       # List of allowed regions
       values:
+      %{ for r in split(",", allowed_regions) }
+        - ${trimspace(r)}
+      %{ endfor }
+  resources:
+    - "*"
+
+- sid: "RestrictLambdaToSpecifiedRegions"
+  effect: "Deny"
+  actions:
+    - "lambda:*"
+  condition:
+    - test: "StringNotEqualsIgnoreCase"
+      variable: "aws:RequestedRegion"
+      # List of allowed regions
+      values:
+        # Us east-1 required for cloudfront lambda on edge
+      %{ if cloudfront_lambda_edge_enabled == "true" && !contains(split(",", allowed_regions), "us-east-1") }
+        - us-east-1
+      %{ endif }
       %{ for r in split(",", allowed_regions) }
         - ${trimspace(r)}
       %{ endfor }
